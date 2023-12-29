@@ -4,7 +4,46 @@
 \usetikzlibrary{math}
 
 \usepackage{xcolor}
-\usepackage{tol_colors}
+
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={Easy colorblind-safe typesetting: the colorblind package},
+    pdfauthor={Simon Pfahler},
+}
+\usepackage{cleveref}
+
+\usepackage{csquotes}
+\usepackage[backend=biber, style=numeric-comp, seconds=true, sorting=none, subentry=true, doi=false, alldates=iso]{biblatex}
+\renewcommand*{\entrysetpunct}{\\[5pt]}
+\addbibresource{bib.bib}
+
+\usepackage{colorblind}
+
+\title{Easy colorblind-safe typesetting:\\ the \textbf{colorblind} package}
+\author{Simon Pfahler}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Provided color schemes}
+
+\subsection{Paul Tol's color schemes}
+
+\begin{figure}[ht]
+    \centering
+    \drawScheme{T_B_Q}
+    \caption{Bright qualitative color scheme by Paul Tol~\cite{Tol}.}
+    \label{fig:T_B_Q}
+\end{figure}
+
+
+
+
+
+
+\section{Experimental and work in progress}
 
 \let\oldcolor\color
 
@@ -42,14 +81,6 @@
     }%
 }
 
-\title{Easy colorblind-safe typesetting:\\ the \textbf{colorblind} package}
-\author{Simon Pfahler}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -62,32 +93,32 @@
         \definecolor{hsbtest2}{hsb}{0.266, 0.468, 0.664}
         
         % Tol's bright qualitative color scheme
-        \fill[Tblue] (0,0) circle (\radius);
-        \fill[Tcyan] (\dx,0) circle (\radius);
-        \fill[Tgreen] (2*\dx,0) circle (\radius);
-        \fill[Tyellow] (3*\dx,0) circle (\radius);
-        \fill[Tred] (4*\dx,0) circle (\radius);
-        \fill[Tpurple] (5*\dx,0) circle (\radius);
-        \fill[Tgrey] (6*\dx,0) circle (\radius);
+        \fill[T_B_Q1] (0,0) circle (\radius);
+        \fill[T_B_Q2] (\dx,0) circle (\radius);
+        \fill[T_B_Q3] (2*\dx,0) circle (\radius);
+        \fill[T_B_Q4] (3*\dx,0) circle (\radius);
+        \fill[T_B_Q5] (4*\dx,0) circle (\radius);
+        \fill[T_B_Q6] (5*\dx,0) circle (\radius);
+        \fill[T_B_Qgrey] (6*\dx,0) circle (\radius);
 
         \fill[hsbtest1] (8*\dx,0) circle (\radius);
         \fill[hsbtest2] (9*\dx,0) circle (\radius);
         
         {
         \protanopia
-        \fill[Tblue, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q1, rounded corners=0.7*\radius cm]
             (0-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tcyan, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q2, rounded corners=0.7*\radius cm]
             (\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tgreen, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q3, rounded corners=0.7*\radius cm]
             (2*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tyellow, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q4, rounded corners=0.7*\radius cm]
             (3*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tred, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q5, rounded corners=0.7*\radius cm]
             (4*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tpurple, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tgrey, rounded corners=0.7*\radius cm]
+        \fill[T_B_Qgrey, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
 
         \fill[hsbtest1, rounded corners=0.7*\radius cm]
@@ -99,19 +130,19 @@
         
         {
         \deuteranopia
-        \fill[Tblue, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q1, rounded corners=0.7*\radius cm]
             (0-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tcyan, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q2, rounded corners=0.7*\radius cm]
             (\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tgreen, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q3, rounded corners=0.7*\radius cm]
             (2*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tyellow, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q4, rounded corners=0.7*\radius cm]
             (3*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tred, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q5, rounded corners=0.7*\radius cm]
             (4*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tpurple, rounded corners=0.7*\radius cm]
+        \fill[T_B_Q6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[Tgrey, rounded corners=0.7*\radius cm]
+        \fill[T_B_Qgrey, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         
         \fill[hsbtest1, rounded corners=0.7*\radius cm]
@@ -120,7 +151,7 @@
             (9*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         }
     \end{tikzpicture}
-    \caption{Paul Tol's bright qualitative color scheme, normal vision, protanopia and deuteranopia}
+    \caption{Test for deuteranopia and tritanopia commands: Left shows Tol's bright qualitative scheme, with deuteranopia and tritanopia vision in the second and third row. Right shows two colors with the same numbers in rgb and hsb, where the hsb variant gets translated incorrectly to color-deficient visions.}
 \end{figure}
 
 \begin{figure}[ht]
@@ -130,7 +161,9 @@
     {\selectcolormodel{gray}
         \includegraphics[decodearray={0 0 0 1 0 1}, width=0.3\textwidth]{Ishihara_9.png}
     }
-    \caption{Ishihara colorblindness test, normal vision and without the {\color{red}red} channel}
+    \caption{Ishihara colorblindness test, normal vision and without the {\color{red}red} channel.}
 \end{figure}
+
+\printbibliography
 
 \end{document}
