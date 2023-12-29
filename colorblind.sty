@@ -11,7 +11,7 @@
 %%%% Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
 
 % Bright Qualitative colour scheme
-\providecolorset{RGB}{T_B_Q}{}{%
+\providecolorset{RGB}{T_Q_B}{}{%
     1,68,119,170;%
     2,102,204,238;%
     3,34,136,51;%
@@ -21,23 +21,26 @@
     grey,187,187,187;%
     gray,187,187,187%
 }
+
+% High-contrast qualitative color scheme
+%TODO
 %%%% End of color schemes by Paul Tol
 
 %%%% Function to print a color scheme
-\newcommand\drawSchemeRadius{0.7cm}%
-\newcommand\drawSchemeOffset{1cm}%
-\makeatletter%
+\newcommand\drawSchemeRadius{0.7cm}
+\newcommand\drawSchemeOffset{1cm}
+\makeatletter
 \newcommand\drawScheme[1]{%
     \tikz{%
         \newcounter{ColorNum}\setcounter{ColorNum}{1}%
         \whiledo{%
-            \@ifundefined{\string\color@T_B_Q\theColorNum}{\boolean{false}}{\boolean{true}}%
+            \@ifundefined{\string\color@#1\theColorNum}{\boolean{false}}{\boolean{true}}%
         }{%
             \fill[#1\the\value{ColorNum}] (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,0) circle (\drawSchemeRadius);%
             \stepcounter{ColorNum}%
         }%
         \fill[#1grey] (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,0) circle(\drawSchemeRadius);%
     }%
-}%
-\makeatother%
+}
+\makeatother
 %%%% End of Function to print a color scheme
