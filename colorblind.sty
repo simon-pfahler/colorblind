@@ -8,9 +8,11 @@
 \DeclareOption*{\PackageWarning{examplepackage}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
-%%%% Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
+%>>> Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
 
-% Bright Qualitative colour scheme
+%>>> Qualitative color schemes
+
+% Bright Qualitative color scheme
 \providecolorset{RGB}{T_Q_B}{}{%
     1,68,119,170;%
     2,102,204,238;%
@@ -23,24 +25,200 @@
 }
 
 % High-contrast qualitative color scheme
-%TODO
-%%%% End of color schemes by Paul Tol
+\providecolorset{RGB}{T_Q_HC}{}{%
+    1,255,255,255;%
+    2,221,170,51;%
+    3,187,85,102;%
+    4,0,68,136;%
+    grey,0,0,0;%
+    gray,0,0,0%
+}
 
-%%%% Function to print a color scheme
+% Vibrant qualitative color scheme
+\providecolorset{RGB}{T_Q_V}{}{%
+    1,0,119,187;%
+    2,51,187,238;%
+    3,0,153,136;%
+    4,238,119,51;%
+    5,204,51,17;%
+    6,238,51,119;%
+    grey,187,187,187;%
+    gray,187,187,187%
+}
+
+% Muted qualitative color scheme
+\providecolorset{RGB}{T_Q_M}{}{%
+    1,51,34,136;%
+    2,136,204,238;%
+    3,68,170,153;%
+    4,153,153,51;%
+    5,221,204,119;%
+    6,204,102,119;%
+    7,136,34,85;%
+    8,170,68,153;%
+    grey,221,221,221;%
+    gray,221,221,221%
+}
+
+% Medium-contrast qualitative color scheme
+\providecolorset{RGB}{T_Q_MC}{}{%
+    1,255,255,255;%
+    2,238,204,102;%
+    3,238,153,170;%
+    4,102,153,204;%
+    5,153,119,0;%
+    6,153,68,85;%
+    7,0,68,136;%
+    grey,0,0,0;%
+    gray,0,0,0%
+}
+
+% Pale qualitative color scheme, for highlighting
+\providecolorset{RGB}{T_Q_PH}{}{%
+    1,187,204,238;%
+    2,204,238,255;%
+    3,204,221,170;%
+    4,238,238,187;%
+    5,255,204,204;%
+    grey,221,221,221;%
+    gray,221,221,221%
+}
+
+% Dark qualitative color scheme, for text colors
+\providecolorset{RGB}{T_Q_DT}{}{%
+    1,34,34,85;%
+    2,34,85,85;%
+    3,34,85,34;%
+    4,102,102,51;%
+    5,102,51,51;%
+    grey,85,85,85;%
+    gray,85,85,85%
+}
+
+% Light qualitative color scheme
+\providecolorset{RGB}{T_Q_L}{}{%
+    1,119,170,221;%
+    2,153,221,255;%
+    3,68,187,153;%
+    4,187,204,51;%
+    5,170,170,0;%
+    6,238,221,136;%
+    7,238,136,102;%
+    8,255,170,187;%
+    grey,221,221,221;%
+    gray,221,221,221%
+}
+
+%<<< Qualitative color schemes
+
+%>>> Diverging color schemes
+
+% Sunset diverging color scheme
+\providecolorset{RGB}{T_D_S}{}{%
+    1,54,75,154;%
+    2,74,123,183;%
+    3,110,166,205;%
+    4,152,202,225;%
+    5,194,228,239;%
+    6,234,236,204;%
+    7,254,218,139;%
+    8,253,179,102;%
+    9,246,126,75;%
+    10,221,61,45;%
+    11,165,0,38;%
+    grey,255,255,255;%
+    gray,255,255,25%
+}
+
+% BuRd diverging color scheme
+\providecolorset{RGB}{T_D_BR}{}{%
+    1,32,102,172;%
+    2,67,147,195;%
+    3,146,197,222;%
+    4,209,229,240;%
+    5,247,247,247;%
+    6,253,219,199;%
+    7,244,165,130;%
+    8,214,96,77;%
+    9,178,24,43;%
+    grey,255,238,153;%
+    gray,255,238,153%
+}
+
+% PRGn diverging color scheme
+\providecolorset{RGB}{T_D_PG}{}{%
+    1,118,42,131;%
+    2,153,112,171;%
+    3,194,165,207;%
+    4,231,212,232;%
+    5,247,247,247;%
+    6,217,240,211;%
+    7,172,211,158;%
+    8,90,174,97;%
+    9,27,120,55;%
+    grey,255,238,153;%
+    gray,255,238,153%
+}
+
+%<<< Diverging color schemes
+
+%>>> Sequential color schemes
+
+% YlOrBr sequential color scheme
+\providecolorset{RGB}{T_S_YB}{}{%
+    1,255,255,229;%
+    2,255,247,188;%
+    3,254,227,145;%
+    4,254,196,79;%
+    5,251,154,41;%
+    6,236,112,20;%
+    7,204,76,2;%
+    8,153,52,4;%
+    9,102,37,6;%
+    grey,136,136,136;%
+    gray,136,136,136%
+}
+
+% Discrete rainbow color scheme
+\providecolorset{RGB}{T_S_DR}{}{%
+    1,209,187,215;%
+    2,174,118,163;%
+    3,136,46,114;%
+    4,25,101,176;%
+    5,82,137,199;%
+    6,123,175,222;%
+    7,78,178,101;%
+    8,144,201,135;%
+    9,202,224,171;%
+    10,247,240,86;%
+    11,246,193,65;%
+    12,241,147,45;%
+    13,232,96,28;%
+    14,220,5,12;%
+    grey,119,119,119;%
+    gray,119,119,119%
+}
+
+%<<< Sequential color schemes
+
+%<<< Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
+
+%>>> Function to print a color scheme
 \newcommand\drawSchemeRadius{0.7cm}
 \newcommand\drawSchemeOffset{1cm}
+\newcounter{ColorNum}
 \makeatletter
 \newcommand\drawScheme[1]{%
     \tikz{%
-        \newcounter{ColorNum}\setcounter{ColorNum}{1}%
+        \setcounter{ColorNum}{1}%
         \whiledo{%
             \@ifundefined{\string\color@#1\theColorNum}{\boolean{false}}{\boolean{true}}%
         }{%
-            \fill[#1\the\value{ColorNum}] (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,0) circle (\drawSchemeRadius);%
+            \draw[fill=#1\the\value{ColorNum}] (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,0) circle (\drawSchemeRadius);%
             \stepcounter{ColorNum}%
         }%
-        \fill[#1grey] (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,0) circle(\drawSchemeRadius);%
+        \draw[fill=#1grey] (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,0) circle(\drawSchemeRadius);%
     }%
 }
 \makeatother
-%%%% End of Function to print a color scheme
+%<<< Function to print a color scheme
