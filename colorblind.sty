@@ -5,13 +5,11 @@
 \RequirePackage{ifthen}
 \RequirePackage{tikz}
 
-\DeclareOption*{\PackageWarning{examplepackage}{Unknown '\CurrentOption'}}
-\ProcessOptions\relax
-
+\DeclareOption{Tol}{
 %>>> Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
-
+%
 %>>> Qualitative color schemes
-
+%
 % Bright Qualitative color scheme
 \providecolorset{RGB}{T_Q_B}{}{%
     1,68,119,170;%
@@ -23,7 +21,7 @@
     grey,187,187,187;%
     gray,187,187,187%
 }
-
+%
 % High-contrast qualitative color scheme
 \providecolorset{RGB}{T_Q_HC}{}{%
     1,255,255,255;%
@@ -33,7 +31,7 @@
     grey,0,0,0;%
     gray,0,0,0%
 }
-
+%
 % Vibrant qualitative color scheme
 \providecolorset{RGB}{T_Q_V}{}{%
     1,0,119,187;%
@@ -45,7 +43,7 @@
     grey,187,187,187;%
     gray,187,187,187%
 }
-
+%
 % Muted qualitative color scheme
 \providecolorset{RGB}{T_Q_M}{}{%
     1,51,34,136;%
@@ -59,7 +57,7 @@
     grey,221,221,221;%
     gray,221,221,221%
 }
-
+%
 % Medium-contrast qualitative color scheme
 \providecolorset{RGB}{T_Q_MC}{}{%
     1,255,255,255;%
@@ -72,7 +70,7 @@
     grey,0,0,0;%
     gray,0,0,0%
 }
-
+%
 % Pale qualitative color scheme, for highlighting
 \providecolorset{RGB}{T_Q_PH}{}{%
     1,187,204,238;%
@@ -83,7 +81,7 @@
     grey,221,221,221;%
     gray,221,221,221%
 }
-
+%
 % Dark qualitative color scheme, for text colors
 \providecolorset{RGB}{T_Q_DT}{}{%
     1,34,34,85;%
@@ -94,7 +92,7 @@
     grey,85,85,85;%
     gray,85,85,85%
 }
-
+%
 % Light qualitative color scheme
 \providecolorset{RGB}{T_Q_L}{}{%
     1,119,170,221;%
@@ -108,11 +106,11 @@
     grey,221,221,221;%
     gray,221,221,221%
 }
-
+%
 %<<< Qualitative color schemes
-
+%
 %>>> Diverging color schemes
-
+%
 % Sunset diverging color scheme
 \providecolorset{RGB}{T_D_S}{}{%
     1,54,75,154;%
@@ -129,7 +127,7 @@
     grey,255,255,255;%
     gray,255,255,25%
 }
-
+%
 % BuRd diverging color scheme
 \providecolorset{RGB}{T_D_BR}{}{%
     1,32,102,172;%
@@ -144,7 +142,7 @@
     grey,255,238,153;%
     gray,255,238,153%
 }
-
+%
 % PRGn diverging color scheme
 \providecolorset{RGB}{T_D_PG}{}{%
     1,118,42,131;%
@@ -159,11 +157,11 @@
     grey,255,238,153;%
     gray,255,238,153%
 }
-
+%
 %<<< Diverging color schemes
-
+%
 %>>> Sequential color schemes
-
+%
 % YlOrBr sequential color scheme
 \providecolorset{RGB}{T_S_YB}{}{%
     1,255,255,229;%
@@ -178,7 +176,7 @@
     grey,136,136,136;%
     gray,136,136,136%
 }
-
+%
 % Discrete rainbow color scheme
 \providecolorset{RGB}{T_S_DR}{}{%
     1,209,187,215;%
@@ -198,11 +196,13 @@
     grey,119,119,119;%
     gray,119,119,119%
 }
-
+%
 %<<< Sequential color schemes
-
+%
 %<<< Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
+}
 
+\DeclareOption{Okabe_Ito}{
 %>>> Qualitative color scheme by Okabe and Ito
 \providecolorset{RGB}{OI}{}{%
     1,230,159,0;%
@@ -216,6 +216,10 @@
     gray,0,0,0%
 }
 %<<< Qualitative color scheme by Okabe and Ito
+}
+
+\DeclareOption*{\PackageWarning{colorblind}{Unknown '\CurrentOption'}}
+\ProcessOptions\relax
 
 %>>> Function to print a color scheme
 \newcommand\drawSchemeRadius{0.7cm}
