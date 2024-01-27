@@ -1,5 +1,8 @@
-\documentclass{scrartcl}
+\documentclass{article}
+\usepackage[left=4cm,right=3cm,top=3cm,bottom=3cm, marginpar=3cm]{geometry}
+\setlength{\parindent}{0pt}
 
+\usepackage{cprotect}
 \usepackage{tikz}
 \usetikzlibrary{math}
 
@@ -17,17 +20,50 @@
 \renewcommand*{\entrysetpunct}{\\[5pt]}
 \addbibresource{bib.bib}
 
-\usepackage[Tol, Okabe_Ito]{colorblind}
+\usepackage[Tol, OkabeIto]{colorblind}
 
-\title{Easy colorblind-safe typesetting:\\ the \textbf{colorblind} package}
+\newcommand\colorblind{\textbf{colorblind} }
+
+\reversemarginpar
+\newcommand\marg[1]{\leavevmode\marginpar{\raggedleft #1}}
+\newcommand\tbs{\textbackslash}
+
+\title{Easy colorblind-safe typesetting:\\ the \colorblind package}
 \author{Simon Pfahler}
-\date{\today}
+\date{\today\\Version 0.1}
+
 
 \begin{document}
 
 \maketitle
 
-\section{Provided color schemes}
+\begin{abstract}
+    This package provides the tools necessary for colorblind-safe typesetting in \LaTeX.
+    It provides color schemes for any application, including qualitative, diverging and sequential schemes.
+    Additionally, this package enables checking colorblind-safeness continuously during writing.
+    Therefore, colorblind-safeness is incorporated into the writing process, making it both less cumbersome and less error-prone.
+\end{abstract}
+
+\tableofcontents
+
+\section{Quick introduction}
+\cprotect\marg{\verb!Tol!\\\verb!OkabeIto!}%
+The primary function of the \colorblind package is to provide a set of color schemes suitable for a wide variety of applications.
+For this purpose, the color schemes by Tol~\cite{Tol}, as well as the famous Okabe Ito color palette~\cite{Ichihara_2008} are implemented.
+They can be activated by the package options \verb!Tol! or \verb!OkabeIto!.
+
+All colors provided start with a prefix indicating the scheme they belong to, followed by a number (main colors) or the word \verb!gray! (color reserved for bad data).%
+\cprotect\footnote{%
+    The spelling \verb!grey! is also implemented, because I can never remember which one a given package uses.
+}
+The prefix for the different color schemes can be found in \cref{sec:colors}.
+
+\cprotect\marg{\verb!\drawScheme{...}!}%
+The visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
+Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T_Q_B}! to print the qualitative bright scheme by Tol.
+
+
+\section{Provided color schemes}\label{sec:colors}
 
 \subsection{Paul Tol's color schemes}
 
