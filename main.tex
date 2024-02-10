@@ -40,7 +40,7 @@
 \begin{abstract}
     This package provides the tools necessary for colorblind-safe typesetting in \LaTeX.
     It provides color schemes for any application, including qualitative, diverging and sequential schemes.
-    Additionally, this package enables checking colorblind-safeness continuously during writing.
+    Additionally, this package enables checking colorblind-safeness continuously during writing\footnote{This is still future work}.
     Therefore, colorblind-safeness is incorporated into the writing process, making it both less cumbersome and less error-prone.
 \end{abstract}
 
@@ -60,7 +60,7 @@ The prefix for the different color schemes can be found in \cref{sec:colors}.
 
 \cprotect\marg{\verb!\drawScheme{...}!}%
 The visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
-Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T_Q_B}! to print the qualitative bright scheme by Tol.
+Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol.
 
 
 \section{Provided color schemes}\label{sec:colors}
@@ -71,97 +71,97 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_B}
+    \drawScheme{T-Q-B}
     \caption{Bright qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_B}
+    \label{fig:T-Q-B}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_HC}
+    \drawScheme{T-Q-HC}
     \caption{High-contrast qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_HC}
+    \label{fig:T-Q-HC}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_V}
+    \drawScheme{T-Q-V}
     \caption{Vibrant qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_V}
+    \label{fig:T-Q-V}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_M}
+    \drawScheme{T-Q-M}
     \caption{Muted qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_M}
+    \label{fig:T-Q-M}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_MC}
+    \drawScheme{T-Q-MC}
     \caption{Medium-contrast qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_MC}
+    \label{fig:T-Q-MC}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_PH}
+    \drawScheme{T-Q-PH}
     \caption{Pale qualitative color scheme by Paul Tol~\cite{Tol}, for highlighting only.}
-    \label{fig:T_Q_PH}
+    \label{fig:T-Q-PH}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_DT}
+    \drawScheme{T-Q-DT}
     \caption{Dark qualitative color scheme by Paul Tol~\cite{Tol}, for text color only.}
-    \label{fig:T_Q_DT}
+    \label{fig:T-Q-DT}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_Q_L}
+    \drawScheme{T-Q-L}
     \caption{Light qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_Q_L}
+    \label{fig:T-Q-L}
 \end{figure}
 
 \subsubsection{Diverging color schemes}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_D_S}
+    \drawScheme{T-D-S}
     \caption{Sunset diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_D_S}
+    \label{fig:T-D-S}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_D_BR}
+    \drawScheme{T-D-BR}
     \caption{BuRd diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_D_BR}
+    \label{fig:T-D-BR}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_D_PG}
+    \drawScheme{T-D-PG}
     \caption{PRGn diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_D_PG}
+    \label{fig:T-D-PG}
 \end{figure}
 
 \subsubsection{Sequential color schemes}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_S_YB}
+    \drawScheme{T-S-YB}
     \caption{YlOrBr sequential color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_S_YB}
+    \label{fig:T-S-YB}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \drawScheme{T_S_DR}
+    \drawScheme{T-S-DR}
     \caption{Discrete Rainbow sequential color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T_S_DR}
+    \label{fig:T-S-DR}
 \end{figure}
 
 \subsection{Okabe Ito qualitative color scheme}
@@ -224,32 +224,32 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
         \definecolor{hsbtest2}{hsb}{0.266, 0.468, 0.664}
         
         % Tol's bright qualitative color scheme
-        \fill[T_Q_B1] (0,0) circle (\radius);
-        \fill[T_Q_B2] (\dx,0) circle (\radius);
-        \fill[T_Q_B3] (2*\dx,0) circle (\radius);
-        \fill[T_Q_B4] (3*\dx,0) circle (\radius);
-        \fill[T_Q_B5] (4*\dx,0) circle (\radius);
-        \fill[T_Q_B6] (5*\dx,0) circle (\radius);
-        \fill[T_Q_Bgrey] (6*\dx,0) circle (\radius);
+        \fill[T-Q-B1] (0,0) circle (\radius);
+        \fill[T-Q-B2] (\dx,0) circle (\radius);
+        \fill[T-Q-B3] (2*\dx,0) circle (\radius);
+        \fill[T-Q-B4] (3*\dx,0) circle (\radius);
+        \fill[T-Q-B5] (4*\dx,0) circle (\radius);
+        \fill[T-Q-B6] (5*\dx,0) circle (\radius);
+        \fill[T-Q-Bgrey] (6*\dx,0) circle (\radius);
 
         \fill[hsbtest1] (8*\dx,0) circle (\radius);
         \fill[hsbtest2] (9*\dx,0) circle (\radius);
         
         {
         \protanopia
-        \fill[T_Q_B1, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B1, rounded corners=0.7*\radius cm]
             (0-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B2, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B2, rounded corners=0.7*\radius cm]
             (\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B3, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B3, rounded corners=0.7*\radius cm]
             (2*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B4, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B4, rounded corners=0.7*\radius cm]
             (3*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B5, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B5, rounded corners=0.7*\radius cm]
             (4*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B6, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_Bgrey, rounded corners=0.7*\radius cm]
+        \fill[T-Q-Bgrey, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
 
         \fill[hsbtest1, rounded corners=0.7*\radius cm]
@@ -261,19 +261,19 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
         
         {
         \deuteranopia
-        \fill[T_Q_B1, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B1, rounded corners=0.7*\radius cm]
             (0-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B2, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B2, rounded corners=0.7*\radius cm]
             (\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B3, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B3, rounded corners=0.7*\radius cm]
             (2*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B4, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B4, rounded corners=0.7*\radius cm]
             (3*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B5, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B5, rounded corners=0.7*\radius cm]
             (4*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_B6, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T_Q_Bgrey, rounded corners=0.7*\radius cm]
+        \fill[T-Q-Bgrey, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         
         \fill[hsbtest1, rounded corners=0.7*\radius cm]

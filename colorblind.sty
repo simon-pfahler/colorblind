@@ -11,7 +11,7 @@
 %>>> Qualitative color schemes
 %
 % Bright Qualitative color scheme
-\providecolorset{RGB}{T_Q_B}{}{%
+\providecolorset{RGB}{T-Q-B}{}{%
     1,68,119,170;%
     2,102,204,238;%
     3,34,136,51;%
@@ -23,7 +23,7 @@
 }
 %
 % High-contrast qualitative color scheme
-\providecolorset{RGB}{T_Q_HC}{}{%
+\providecolorset{RGB}{T-Q-HC}{}{%
     1,255,255,255;%
     2,221,170,51;%
     3,187,85,102;%
@@ -33,7 +33,7 @@
 }
 %
 % Vibrant qualitative color scheme
-\providecolorset{RGB}{T_Q_V}{}{%
+\providecolorset{RGB}{T-Q-V}{}{%
     1,0,119,187;%
     2,51,187,238;%
     3,0,153,136;%
@@ -45,7 +45,7 @@
 }
 %
 % Muted qualitative color scheme
-\providecolorset{RGB}{T_Q_M}{}{%
+\providecolorset{RGB}{T-Q-M}{}{%
     1,51,34,136;%
     2,136,204,238;%
     3,68,170,153;%
@@ -59,7 +59,7 @@
 }
 %
 % Medium-contrast qualitative color scheme
-\providecolorset{RGB}{T_Q_MC}{}{%
+\providecolorset{RGB}{T-Q-MC}{}{%
     1,255,255,255;%
     2,238,204,102;%
     3,238,153,170;%
@@ -72,7 +72,7 @@
 }
 %
 % Pale qualitative color scheme, for highlighting
-\providecolorset{RGB}{T_Q_PH}{}{%
+\providecolorset{RGB}{T-Q-PH}{}{%
     1,187,204,238;%
     2,204,238,255;%
     3,204,221,170;%
@@ -83,7 +83,7 @@
 }
 %
 % Dark qualitative color scheme, for text colors
-\providecolorset{RGB}{T_Q_DT}{}{%
+\providecolorset{RGB}{T-Q-DT}{}{%
     1,34,34,85;%
     2,34,85,85;%
     3,34,85,34;%
@@ -94,7 +94,7 @@
 }
 %
 % Light qualitative color scheme
-\providecolorset{RGB}{T_Q_L}{}{%
+\providecolorset{RGB}{T-Q-L}{}{%
     1,119,170,221;%
     2,153,221,255;%
     3,68,187,153;%
@@ -112,7 +112,7 @@
 %>>> Diverging color schemes
 %
 % Sunset diverging color scheme
-\providecolorset{RGB}{T_D_S}{}{%
+\providecolorset{RGB}{T-D-S}{}{%
     1,54,75,154;%
     2,74,123,183;%
     3,110,166,205;%
@@ -129,7 +129,7 @@
 }
 %
 % BuRd diverging color scheme
-\providecolorset{RGB}{T_D_BR}{}{%
+\providecolorset{RGB}{T-D-BR}{}{%
     1,32,102,172;%
     2,67,147,195;%
     3,146,197,222;%
@@ -144,7 +144,7 @@
 }
 %
 % PRGn diverging color scheme
-\providecolorset{RGB}{T_D_PG}{}{%
+\providecolorset{RGB}{T-D-PG}{}{%
     1,118,42,131;%
     2,153,112,171;%
     3,194,165,207;%
@@ -163,7 +163,7 @@
 %>>> Sequential color schemes
 %
 % YlOrBr sequential color scheme
-\providecolorset{RGB}{T_S_YB}{}{%
+\providecolorset{RGB}{T-S-YB}{}{%
     1,255,255,229;%
     2,255,247,188;%
     3,254,227,145;%
@@ -178,7 +178,7 @@
 }
 %
 % Discrete rainbow color scheme
-\providecolorset{RGB}{T_S_DR}{}{%
+\providecolorset{RGB}{T-S-DR}{}{%
     1,209,187,215;%
     2,174,118,163;%
     3,136,46,114;%
@@ -233,9 +233,11 @@
             \@ifundefined{\string\color@#1\theColorNum}{\boolean{false}}{\boolean{true}}%
         }{%
             \draw[fill=#1\the\value{ColorNum}] (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,0) circle (\drawSchemeRadius);%
+            \node[rotate=25, anchor=north east] at (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,-1*\drawSchemeRadius) {#1\theColorNum};%
             \stepcounter{ColorNum}%
         }%
         \draw[fill=#1grey] (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,0) circle(\drawSchemeRadius);%
+        \node[rotate=25, anchor=north east] at (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset, -1*\drawSchemeRadius) {#1grey};%
     }%
 }
 \makeatother
