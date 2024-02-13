@@ -228,14 +228,37 @@
 \makeatletter
 \newcommand\drawScheme[1]{%
     \tikz{%
+        \node[inner sep=1, fill=red] at (-1.2*\drawSchemeRadius,2.3*\drawSchemeRadius) {R};
+        \node[inner sep=1, fill=green] at (-1.2*\drawSchemeRadius, 1.8*\drawSchemeRadius) {G};
+        \node[inner sep=1, fill=blue] at (-1.2*\drawSchemeRadius,1.3*\drawSchemeRadius) {B};
         \setcounter{ColorNum}{1}%
         \whiledo{%
             \@ifundefined{\string\color@#1\theColorNum}{\boolean{false}}{\boolean{true}}%
         }{%
+            \extractcolorspecs{#1\the\value{ColorNum}}{\modelspec}{\colorspec}%
+            \tikzmath{
+                int \r, \g, \b;
+                \r = round(255*array({\colorspec},0));
+                \g = round(255*array({\colorspec},1));
+                \b = round(255*array({\colorspec},2));
+            }%
+            \node at (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,2.3*\drawSchemeRadius) {\r};
+            \node at (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,1.8*\drawSchemeRadius) {\g};
+            \node at (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,1.3*\drawSchemeRadius) {\b};
             \draw[fill=#1\the\value{ColorNum}] (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,0) circle (\drawSchemeRadius);%
             \node[rotate=25, anchor=north east] at (\value{ColorNum}*\drawSchemeOffset-\drawSchemeOffset,-1*\drawSchemeRadius) {#1\theColorNum};%
             \stepcounter{ColorNum}%
         }%
+        \extractcolorspecs{#1grey}{\modelspec}{\colorspec}%
+        \tikzmath{
+            int \r, \g, \b;
+            \r = round(255*array({\colorspec},0));
+            \g = round(255*array({\colorspec},1));
+            \b = round(255*array({\colorspec},2));
+        }%
+        \node at (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,2.3*\drawSchemeRadius) {\r};
+        \node at (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,1.8*\drawSchemeRadius) {\g};
+        \node at (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,1.3*\drawSchemeRadius) {\b};
         \draw[fill=#1grey] (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset,0) circle(\drawSchemeRadius);%
         \node[rotate=25, anchor=north east] at (\value{ColorNum}*\drawSchemeOffset-0.5*\drawSchemeOffset, -1*\drawSchemeRadius) {#1grey};%
     }%
