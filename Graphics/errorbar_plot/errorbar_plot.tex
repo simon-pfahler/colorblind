@@ -1,0 +1,86 @@
+%! TeX program = lualatex
+
+\documentclass[tikz]{standalone}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+%colorblind colors
+\usepackage[Tol]{../../colorblind}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, fit, arrows.meta, decorations.pathmorphing}
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+
+\usepackage{pgfplots, pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+%%%% from https://tex.stackexchange.com/questions/355713/pgfplots-show-error-marker-in-legend
+\pgfplotsset{error bar legend/.style={%
+    /pgfplots/legend image code/.prefix code={%
+      \pgfkeysgetvalue{/pgfplots/error bars/error mark}{\pgfplotserrorbarsmark}%
+      \draw[%
+        /pgfplots/every error bar, 
+        mark=\pgfplotserrorbarsmark, 
+        /pgfplots/error bars/error mark options, 
+        sharp plot,
+        ##1
+      ] plot coordinates {(0.3cm, -0.15cm) (0.3cm, 0.15cm)};%
+      %\pgfkeysalso{%
+        %/pgfplots/error bars/draw error bar={(0.3cm, 0cm)}{(0.3cm, 0.15cm)},
+        %/pgfplots/error bars/draw error bar={(0.3cm, 0cm)}{(0.3cm, -0.15cm)},
+      %};
+    }
+  }
+}
+%%%%
+
+\pgfplotsset{custom area legend/.style={%
+    /pgfplots/legend image code/.prefix code={%
+        \fill[##1, draw=white] plot coordinates {(0cm, -0.1cm) (0.6cm,-0.1cm) (0.6cm, 0.1cm) (0cm, 0.1cm)};%
+    }
+  }
+}
+
+\def\w{420pt}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.4*\w,
+    height=0.28*\w,
+    scale only axis=true,
+    xlabel = {x},
+    ylabel = {y},
+    x label style = {yshift=2mm},
+    y label style = {yshift=-2mm},
+    clip marker paths=true,
+    axis on top
+    ]
+
+    \fill[T-Q-B5!20] (0,0.1068558) -- (40,0.1068558) -- (40,0.0668558) -- (0,0.0668558) -- cycle;
+    \draw[T-Q-B5] (0,0.0868558) -- (40,0.0868558);
+
+    \addplot[color=T-Q-B1, mark=*, only marks, forget plot]
+        plot[/pgfplots/error bars/.cd, x dir=none, y dir=both, y explicit,
+            error mark=-, error bar style={color=T-Q-B1}]
+        coordinates {
+            (4,0.263148) +- (0.120064,0.120064)
+            (8,0.159158) +- (0.0621894,0.0621894)
+            (12,0.129892) +- (0.0543303,0.0543303)
+            (16,0.112302) +- (0.0358508,0.0358508)
+            (20,0.098435) +- (0.02648,0.02648)
+            (24,0.0909784) +- (0.0215048,0.0215048)
+            (28,0.0894657) +- (0.0212992,0.0212992)
+            (32,0.0869343) +- (0.0202553,0.0202553)
+        };
+    \addlegendimage{T-Q-B1, mark=*, only marks, error bar legend};
+    \addlegendentry{data};
+    \addlegendimage{draw=T-Q-B5, fill=T-Q-B5!20, custom area legend};
+    \addlegendentry{reference};
+
+\end{axis}
+\end{tikzpicture}
+\end{document}
