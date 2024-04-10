@@ -18,8 +18,7 @@
     4,204,187,68;%
     5,238,102,119;%
     6,170,51,119;%
-    grey,187,187,187;%
-    gray,187,187,187%
+    0,187,187,187%
 }
 %
 % High-contrast qualitative color scheme
@@ -28,8 +27,7 @@
     2,221,170,51;%
     3,187,85,102;%
     4,0,68,136;%
-    grey,0,0,0;%
-    gray,0,0,0%
+    0,0,0,0%
 }
 %
 % Vibrant qualitative color scheme
@@ -40,8 +38,7 @@
     4,238,119,51;%
     5,204,51,17;%
     6,238,51,119;%
-    grey,187,187,187;%
-    gray,187,187,187%
+    0,187,187,187%
 }
 %
 % Muted qualitative color scheme
@@ -54,8 +51,7 @@
     6,204,102,119;%
     7,136,34,85;%
     8,170,68,153;%
-    grey,221,221,221;%
-    gray,221,221,221%
+    0,221,221,221%
 }
 %
 % Medium-contrast qualitative color scheme
@@ -67,8 +63,7 @@
     5,153,119,0;%
     6,153,68,85;%
     7,0,68,136;%
-    grey,0,0,0;%
-    gray,0,0,0%
+    0,0,0,0%
 }
 %
 % Pale qualitative color scheme, for highlighting
@@ -78,8 +73,7 @@
     3,204,221,170;%
     4,238,238,187;%
     5,255,204,204;%
-    grey,221,221,221;%
-    gray,221,221,221%
+    0,221,221,221%
 }
 %
 % Dark qualitative color scheme, for text colors
@@ -89,8 +83,7 @@
     3,34,85,34;%
     4,102,102,51;%
     5,102,51,51;%
-    grey,85,85,85;%
-    gray,85,85,85%
+    0,85,85,85%
 }
 %
 % Light qualitative color scheme
@@ -103,8 +96,7 @@
     6,238,221,136;%
     7,238,136,102;%
     8,255,170,187;%
-    grey,221,221,221;%
-    gray,221,221,221%
+    0,221,221,221%
 }
 %
 %<<< Qualitative color schemes
@@ -124,8 +116,7 @@
     9,246,126,75;%
     10,221,61,45;%
     11,165,0,38;%
-    grey,255,255,255;%
-    gray,255,255,25%
+    0,255,255,255%
 }
 %
 % BuRd diverging color scheme
@@ -139,8 +130,7 @@
     7,244,165,130;%
     8,214,96,77;%
     9,178,24,43;%
-    grey,255,238,153;%
-    gray,255,238,153%
+    0,255,238,153%
 }
 %
 % PRGn diverging color scheme
@@ -154,8 +144,7 @@
     7,172,211,158;%
     8,90,174,97;%
     9,27,120,55;%
-    grey,255,238,153;%
-    gray,255,238,153%
+    0,255,238,153%
 }
 %
 %<<< Diverging color schemes
@@ -173,8 +162,7 @@
     7,204,76,2;%
     8,153,52,4;%
     9,102,37,6;%
-    grey,136,136,136;%
-    gray,136,136,136%
+    0,136,136,136%
 }
 %
 % Discrete rainbow color scheme
@@ -193,8 +181,7 @@
     12,241,147,45;%
     13,232,96,28;%
     14,220,5,12;%
-    grey,119,119,119;%
-    gray,119,119,119%
+    0,119,119,119%
 }
 %
 %<<< Sequential color schemes
@@ -212,8 +199,7 @@
     5,0,114,178;%
     6,213,94,0;%
     7,204,121,167;%
-    grey,0,0,0;%
-    gray,0,0,0%
+    0,0,0,0%
 }
 %<<< Qualitative color scheme by Okabe and Ito
 }
@@ -249,7 +235,7 @@
             \node[rotate=25, anchor=north east] at (\value{ColorNum}*\@drawSchemeOffset-\@drawSchemeOffset,-1*\@drawSchemeRadius) {#1\theColorNum};%
             \stepcounter{ColorNum}%
         }%
-        \extractcolorspecs{#1grey}{\modelspec}{\colorspec}%
+        \extractcolorspecs{#10}{\modelspec}{\colorspec}%
         \tikzmath{
             int \r, \g, \b;
             \r = round(255*array({\colorspec},0));
@@ -259,8 +245,8 @@
         \node at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset,2.3*\@drawSchemeRadius) {\r};
         \node at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset,1.8*\@drawSchemeRadius) {\g};
         \node at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset,1.3*\@drawSchemeRadius) {\b};
-        \draw[fill=#1grey] (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset,0) circle(\@drawSchemeRadius);%
-        \node[rotate=25, anchor=north east] at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset, -1*\@drawSchemeRadius) {#1grey};%
+        \draw[fill=#10] (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset,0) circle(\@drawSchemeRadius);%
+        \node[rotate=25, anchor=north east] at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset, -1*\@drawSchemeRadius) {#10};%
     }%
 }
 \makeatother

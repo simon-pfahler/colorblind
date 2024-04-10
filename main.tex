@@ -1,13 +1,15 @@
 %! TeX program = lualatex
-\documentclass{article}
+\documentclass{scrartcl}
 \usepackage[left=4cm,right=3cm,top=3cm,bottom=3cm, marginpar=3cm]{geometry}
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
 
 \usepackage{cprotect}
 \usepackage{tikz}
 \usetikzlibrary{math}
 
 \usepackage{xcolor}
+\usepackage{soul}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -24,6 +26,10 @@
 \usepackage[Tol, OkabeIto]{colorblind}
 
 \newcommand\colorblind{\textbf{colorblind} }
+\newcommand\hlc[2][T-Q-PH4]{{%
+    \colorlet{foo}{#1}%
+    \sethlcolor{foo}\hl{#2}}%
+}
 
 \reversemarginpar
 \newcommand\marg[1]{\leavevmode\marginpar{\raggedleft #1}}
@@ -39,30 +45,86 @@
 \maketitle
 
 \begin{abstract}
-    This package provides the tools necessary for colorblind-safe typesetting in \LaTeX.
-    It provides color schemes for any application, including qualitative, diverging and sequential schemes.
-    Additionally, this package enables checking colorblind-safeness continuously during writing\footnote{This is still future work}.
+    In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
+    This package provides the tools necessary for color-agnostic typesetting in \LaTeX.
+    It provides color schemes for a wide range of applications.
+    The most commonly used schemes are qualitative schemes, providing easily distinguishable colors for use in graphics, but also for text coloring or highlighting.
+    Additionally, diverging and sequential schemes are included which can be used for encoding quantitative information in the colors of a graphic.
     Therefore, colorblind-safeness is incorporated into the writing process, making it both less cumbersome and less error-prone.
 \end{abstract}
 
 \tableofcontents
+\clearpage
 
-\section{Quick introduction}
+\section{Introduction}
 \cprotect\marg{\verb!Tol!\\\verb!OkabeIto!}%
-The primary function of the \colorblind package is to provide a set of color schemes suitable for a wide variety of applications.
-For this purpose, the color schemes by Tol~\cite{Tol}, as well as the famous Okabe Ito color palette~\cite{Ichihara_2008} are implemented.
-They can be activated by the package options \verb!Tol! or \verb!OkabeIto!.
+The \colorblind package provides the color schemes by Paul Tol~\cite{Tol} and the Okabe Ito color palette~\cite{Ichihara_2008}.
+By default, no schemes are loaded.
+Providing one of the options \verb!Tol! or \verb!OkabeIto! loads all corresponding schemes.
 
-All colors provided start with a prefix indicating the scheme they belong to, followed by a number (main colors) or the word \verb!gray! (color reserved for bad data).%
-\cprotect\footnote{%
-    The spelling \verb!grey! is also implemented, because I can never remember which one a given package uses.
-}
-The prefix for the different color schemes can be found in \cref{sec:colors}.
+As an example for how to use the colors, we look at the \emph{bright qualitative} color scheme by Tol.
+\cref{fig:T-Q-Bexample} shows the colors in the scheme
 
-\cprotect\marg{\verb!\drawScheme{...}!}%
-The visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
-Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol, as can be seen in \cref{fig:T-Q-B}.
+\begin{figure}[ht]
+    \centering
+    \drawScheme{T-Q-B}
+    \caption{Bright qualitative color scheme by Tol.}
+    \label{fig:T-Q-Bexample}
+\end{figure}
 
+All colors in this model start with \verb!T-Q-B!, indicating that it is a scheme by \textbf{T}ol, that it is a \textbf{q}ualitative scheme, and that it is the \textbf{b}right scheme.
+The colors in the scheme are specified by a number following the scheme name, in this case ranging from \verb!T-Q-B1! to \verb!T-Q-B6! for the non-grey colors.
+The additional color \verb!T-Q-B0! provides a color that can be used, e.g., to indicate bad data.
+
+There are two reasons why color names are not based on natural color names (e.g., \hlc[T-Q-PH1]{blue}):
+\begin{enumerate}
+    \item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
+        This meaning is difficult for people with color-deficiencies to pick up.
+        By not using natural color names, it is easier to write color-agnostic documents that do not make use of said connotations.
+    \item Natural color names can be cumbersome, e.g., when multiple variations of \hlc[T-Q-PH1]{blue} are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{light blue} or \hlc[T-Q-PH2]{cyan}.
+\end{enumerate}
+
+These colors are used the same way as any other colors. To change the text color to \verb!T-Q-B1! for example, use \verb!\color{T-Q-B1}!.
+
+\subsection{Guidelines}
+On its own, using colorblind-safe colors is not sufficient for making a document truly colorblind-safe.
+This section provides some general rules to follow for colorblind-safe typesetting.
+
+These rules apply to each visual unit of a document individually.
+A visual unit may be a graphic, a table or a paragraph of text.
+It might be advisable to be consistent also between different visual units (e.g., use the same color scheme for all graphics), but this is more of an aesthetic argument and is not necessary for a colorblind-safe document.
+
+The most important rules are, in this order:
+\begin{enumerate}
+    \item \hlc{Do not mix the colors in qualitative schemes!}\newline
+        Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? also interferes with the packages intention of providing distinguishable colors.
+    \item \hlc{Only use colors from one color scheme for a given visual unit!}\newline
+        The colors are defined with the purpose of being easily distinguishable, but this is only true within each color scheme.
+        Using colors from multiple schemes therefore defies the point of this package.
+    \item \hlc{Do not use shades of colors!}\newline
+        Saturation and brightness are also used for distinguishability, so mixings involving \verb!white! and \verb!black! should also be avoided.
+\end{enumerate}
+
+The first two rules should be ensured in any visual unit. If the need for more colors arises, a different color scheme should be used alltogether.
+While the third rule should also be followed in most scenarios, there are some situations that might allow for breaking this rule. As an example, consider \cref{fig:errorbar_plot}, where the error bands are colored with a lighter shade of the original color.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[draft]{Graphics/errorbar_plot/errorbar_plot.pdf}
+    \caption{A plot with error bands using a lighter shade of a color, breaking rule 3.}
+    \label{fig:errorbar_plot}
+\end{figure}
+
+There are additional guidelines that should be kept in mind when typesetting colorblind-safe documents.
+Depending on the specific visual unit, they are usually not as vital as the rules stated above.
+In no particular order, they are:
+\begin{itemize}
+    \item \hlc{Do not convey information only through color!}\newline
+        When possible, encode the information the color provides also in a different way, e.g., through text, patterns or symbols.
+    \item \hlc{Do not use color for information and aesthetics!}\newline
+        Color is often also used for aesthetic reasons, e.g., on a scientific poster.
+        While this is ok in principle, do not mix information and aesthetics within the same visual unit, as this makes it more difficult to extract the encoded information.
+\end{itemize}
 
 \section{Provided color schemes}\label{sec:colors}
 
@@ -174,6 +236,11 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
     \label{fig:OI}
 \end{figure}
 
+\subsection{Provided commands}
+\cprotect\marg{\verb!\drawScheme{...}!}%
+The visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
+Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol, as can be seen in \cref{fig:T-Q-B}.
+
 
 \section{Experimental and work in progress}
 
@@ -231,7 +298,7 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
         \fill[T-Q-B4] (3*\dx,0) circle (\radius);
         \fill[T-Q-B5] (4*\dx,0) circle (\radius);
         \fill[T-Q-B6] (5*\dx,0) circle (\radius);
-        \fill[T-Q-Bgrey] (6*\dx,0) circle (\radius);
+        \fill[T-Q-B0] (6*\dx,0) circle (\radius);
 
         \fill[hsbtest1] (8*\dx,0) circle (\radius);
         \fill[hsbtest2] (9*\dx,0) circle (\radius);
@@ -250,7 +317,7 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
             (4*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         \fill[T-Q-B6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T-Q-Bgrey, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B0, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
 
         \fill[hsbtest1, rounded corners=0.7*\radius cm]
@@ -274,7 +341,7 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
             (4*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         \fill[T-Q-B6, rounded corners=0.7*\radius cm]
             (5*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-        \fill[T-Q-Bgrey, rounded corners=0.7*\radius cm]
+        \fill[T-Q-B0, rounded corners=0.7*\radius cm]
             (6*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         
         \fill[hsbtest1, rounded corners=0.7*\radius cm]
@@ -290,9 +357,7 @@ Only the prefix of a color scheme should be provided to the command, e.g.\ \verb
     \centering
     \includegraphics[width=0.3\textwidth]{Ishihara_9.png}
     \hspace{1cm}
-    {\selectcolormodel{gray}
-        \includegraphics[decodearray={0 0 0 1 0 1}, width=0.3\textwidth]{Ishihara_9.png}
-    }
+    \includegraphics[decodearray={0 0 0 1 0 1}, width=0.3\textwidth]{Ishihara_9.png}
     \caption{Ishihara colorblindness test, normal vision and without the {\color{red}red} channel.}
 \end{figure}
 
