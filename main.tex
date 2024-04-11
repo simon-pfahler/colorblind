@@ -100,7 +100,7 @@ The most important rules are, in this order:
         The colors in each scheme are defined with the purpose of being easily distinguishable.
         Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? interferes with this.
         A special case of this is that qualitative colors should not be used for quantitative information.
-        In this case, an appropriate non-qualitative color scheme (i.e.\ a sequential or diverging scheme) should be used.
+        In this case, an appropriate non-qualitative color scheme (i.e.\ a diverging or sequential scheme) should be used.
     \item \hlc{Only use colors from one color scheme for a given visual unit!}\newline
         The colors between different schemes are not tuned to be distinguishable.
         Using colors from multiple schemes therefore defies the point of this package.
@@ -131,119 +131,139 @@ In no particular order, they are:
 \end{itemize}
 
 \section{Provided color schemes}\label{sec:colors}
+The color schemes provided are split into three groups:
+\begin{itemize}
+    \item Qualitative schemes:\newline
+        These schemes are used to convey qualitative information, such as different data sources, countries or manufacturers.
+        They should usually be used for coloring text or distinguishing different lines in a plot.
+    \item Diverging color schemes:\newline
+        When quantitative data ranges between two extremes, and the middle is being considered ``neutral'', a diverging color scheme should be used.
+        Examples for this kind of data might be test grades, temperatures or pH values.
+    \item Sequential color schemes:\newline
+        For quantitative data without an important midpoint, sequential color schemes should be preferred over diverging ones.
+        They can be used to denote for example velocities, concentrations or pressures.
+\end{itemize}
 
-\subsection{Paul Tol's color schemes}
+For each of these schemes, this package provides a range of options.
+\Cref{sec:Tol_schemes} shows the schemes designed by Paul Tol~\cite{Tol}, which include qualitative, diverging and sequential schemes (see \cref{sec:T-Q,sec:T-D,sec:T-S}).
+In \cref{sec:OkabeIto}, the Okabe Ito color scheme~\cite{Ichihara_2008} is provided, which is probably the most famous qualitative colorblind-safe color scheme due to various articles in high-ranking journals.
 
-\subsubsection{Qualitative color schemes}
+All of the schemes are colorblind-safe, and some are optimized for printout or designed for a particular purpose.
+This is denoted under the scheme name
 
-\begin{figure}[ht]
+\subsection{Paul Tol's color schemes}\label{sec:Tol_schemes}
+
+\subsubsection{Qualitative color schemes}\label{sec:T-Q}
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-B}
-    \caption{Bright qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-B}
-\end{figure}
-
-\begin{figure}[ht]
+    \scalebox{0.7}{\drawScheme{T-Q-B}}\\
+    Bright\\
+    \phantom{pb}
+\end{minipage}\hfill%
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-HC}
-    \caption{High-contrast qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-HC}
-\end{figure}
+    \scalebox{0.7}{\drawScheme{T-Q-V}}\\
+    Vibrant
+\end{minipage}
 
-\begin{figure}[ht]
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-V}
-    \caption{Vibrant qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-V}
-\end{figure}
-
-\begin{figure}[ht]
+    \scalebox{0.7}{\drawScheme{T-Q-HC}}\\
+    High-Contrast\\
+    works for black and white printout
+\end{minipage}\hfill%
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-M}
-    \caption{Muted qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-M}
-\end{figure}
+    \scalebox{0.7}{\drawScheme{T-Q-MC}}\\
+    Medium-Contrast\\
+    works for black and white printout
+\end{minipage}
 
-\begin{figure}[ht]
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-Q-M}}\\
+    Muted
+\end{center}
+
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-MC}
-    \caption{Medium-contrast qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-MC}
-\end{figure}
-
-\begin{figure}[ht]
+    \scalebox{0.7}{\drawScheme{T-Q-PH}}\\
+    Pale Highlight\\
+    specifically for text background
+\end{minipage}\hfill%
+\begin{minipage}{0.5\textwidth}
     \centering
-    \drawScheme{T-Q-PH}
-    \caption{Pale qualitative color scheme by Paul Tol~\cite{Tol}, for highlighting only.}
-    \label{fig:T-Q-PH}
-\end{figure}
+    \scalebox{0.7}{\drawScheme{T-Q-DT}}\\
+    Dark Text\\
+    specifically for text color
+\end{minipage}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-Q-DT}
-    \caption{Dark qualitative color scheme by Paul Tol~\cite{Tol}, for text color only.}
-    \label{fig:T-Q-DT}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-Q-L}}\\
+    Light\\
+    less distinguishable than other schemes,\\ mostly meant for filling in labelled cells
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-Q-L}
-    \caption{Light qualitative color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-Q-L}
-\end{figure}
+\subsubsection{Diverging color schemes}\label{sec:T-D}
+For diverging schemes, when a continuous palette is needed, the colors are allowed to be linearly interpolated.
 
-\subsubsection{Diverging color schemes}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-D-S}}\\
+    Sunset
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-D-S}
-    \caption{Sunset diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-D-S}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-D-N}}\\
+    Nightfall
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-D-BR}
-    \caption{BuRd diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-D-BR}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-D-BR}}\\
+    BuRd
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-D-PG}
-    \caption{PRGn diverging color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-D-PG}
-\end{figure}
+\subsubsection{Sequential color schemes}\label{sec:T-S}
+For most sequential schemes, a continuous palette can be obtained again by linearly interpolating the colors.
+The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuos variation, the \emph{smooth rainbow} scheme.%
 
-\subsubsection{Sequential color schemes}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-S-YOB}}\\
+    YlOrBr
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-S-YB}
-    \caption{YlOrBr sequential color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-S-YB}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-S-IR}}\\
+    IRidescent
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{T-S-DR}
-    \caption{Discrete Rainbow sequential color scheme by Paul Tol~\cite{Tol}.}
-    \label{fig:T-S-DR}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-S-IN}}\\
+    INcandescent\\
+    not print-friendly
+\end{center}
 
-\subsection{Okabe Ito qualitative color scheme}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-S-DR}}\\
+    Discrete Rainbow\\
+    Do not interpolate!
+\end{center}
 
-\begin{figure}[ht]
-    \centering
-    \drawScheme{OI}
-    \caption{Okabe Ito qualitative color scheme~\cite{Ichihara_2008}.}
-    \label{fig:OI}
-\end{figure}
+\begin{center}
+    \scalebox{0.7}{\drawScheme{T-S-SR}}\\
+    Smooth Rainbow\\
+\end{center}
+
+\subsection{Okabe Ito qualitative color scheme}\label{sec:OkabeIto}
+This is the qualitative color scheme commonly known as the ``Okabe Ito'' color palette~\cite{Ichihara_2008}.
+
+\begin{center}
+    \scalebox{0.7}{\drawScheme{OI}}\\
+    Okabe Ito
+\end{center}
 
 \subsection{Provided commands}
 \cprotect\marg{\verb!\drawScheme{...}!}%
 The visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
-Only the prefix of a color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol, as can be seen in \cref{fig:T-Q-B}.
+The name of the color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol.
 
 
 \section{Experimental and work in progress}
