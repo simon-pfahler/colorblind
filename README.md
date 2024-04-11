@@ -16,6 +16,8 @@ Therefore, colorblind-safeness is incorporated into the writing process, making 
 LaTeX Project Public License, version 1.3c or later.
 
 ## Notes
-This package is available on github: https://github.com/simon-pfahler/colorblind
+This package is available on github:
+https://github.com/simon-pfahler/colorblind
+
 If there are any bugs, please report them there.
 
