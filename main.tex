@@ -128,6 +128,10 @@ In no particular order, they are:
     \item \hlc{Do not use color for information and aesthetics simultaneously!}\newline
         Color is often also used for aesthetic reasons, e.g., on a scientific poster.
         While this is ok in principle, do not mix information and aesthetics within the same visual unit, as this makes it more difficult to extract the encoded information.
+    \item \hlc{Do not use rainbow color schemes!}\newline
+        Due to the many different colors in a rainbow color scheme, they are very difficult to distinguish for people with color-deficiencies.
+        Therefore, it is best to avoid them alltogether.
+        If you insist on using them, Paul Tol provides both a sequential as well as a continuous version, which are optimized to be as distinguishable as possible for any color vision.
 \end{itemize}
 
 \section{Provided color schemes}\label{sec:colors}
@@ -149,7 +153,7 @@ For each of these schemes, this package provides a range of options.
 In \cref{sec:OkabeIto}, the Okabe Ito color scheme~\cite{Ichihara_2008} is provided, which is probably the most famous qualitative colorblind-safe color scheme due to various articles in high-ranking journals.
 
 All of the schemes are colorblind-safe, and some are optimized for printout or designed for a particular purpose.
-This is denoted under the scheme name
+This is denoted under the scheme name.\clearpage
 
 \subsection{Paul Tol's color schemes}\label{sec:Tol_schemes}
 
@@ -201,42 +205,51 @@ This is denoted under the scheme name
     \scalebox{0.7}{\drawScheme{T-Q-L}}\\
     Light\\
     less distinguishable than other schemes,\\ mostly meant for filling in labelled cells
-\end{center}
+\end{center}\clearpage
 
 \subsubsection{Diverging color schemes}\label{sec:T-D}
 For diverging schemes, when a continuous palette is needed, the colors are allowed to be linearly interpolated.
+When using \verb!pgfplots!, the interpolations are available as colormaps with the names of their color scheme.
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-S}}\\
+    \drawSchemeC[0.6\textwidth]{T-D-S}\\
     Sunset
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-N}}\\
+    \drawSchemeC[0.9\textwidth]{T-D-N}\\
     Nightfall
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-BR}}\\
+    \drawSchemeC[0.5\textwidth]{T-D-BR}\\
     BuRd
-\end{center}
+\end{center}\clearpage
 
 \subsubsection{Sequential color schemes}\label{sec:T-S}
 For most sequential schemes, a continuous palette can be obtained again by linearly interpolating the colors.
-The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuos variation, the \emph{smooth rainbow} scheme.%
+The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuos variation, the \emph{smooth rainbow} scheme.
+When using \verb!pgfplots!, the interpolations are available as colormaps with the names of their color scheme.
+
+When the discrete scheme is not shown, this is because there are too many colors in them.
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-S-YOB}}\\
+    \drawSchemeC[0.5\textwidth]{T-S-YOB}\\
     YlOrBr
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-S-IR}}\\
+    \drawSchemeC[\textwidth]{T-S-IR}\\
     IRidescent
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-S-IN}}\\
+    \drawSchemeC[0.6\textwidth]{T-S-IN}\\
     INcandescent\\
     not print-friendly
 \end{center}
@@ -248,7 +261,7 @@ The only exception to this is the \emph{discrete rainbow} scheme, which has an e
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-S-SR}}\\
+    \drawSchemeC[\textwidth]{T-S-SR}\\
     Smooth Rainbow\\
 \end{center}
 
@@ -263,8 +276,14 @@ This is the qualitative color scheme commonly known as the \emph{Okabe Ito} colo
 \subsection{Provided commands}
 \cprotect\marg{\verb!\drawScheme{...}!}%
 The discrete visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
-The name of the color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the qualitative bright scheme by Tol.
+The name of the color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the \emph{qualitative bright} scheme by Tol.
 
+\cprotect\marg{\verb!\drawSchemeC{...}!}%
+The continuous visualizations of color schemes given in this documentation are created with the command \verb!\drawSchemeC{...}!.
+The name of the color scheme should be provided to the command, e.g.\ \verb!\drawSchemeC{T-D-S}! to print the \emph{diverging sunset} scheme by Tol.
+Note that this command only works for color schemes that are allowed to be interpolated.
+
+\clearpage
 \printbibliography
 
 \end{document}
