@@ -80,8 +80,8 @@ There are two reasons why color names are not based on natural color names (e.g.
 \begin{enumerate}
     \item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
         This meaning is difficult for people with color-deficiencies to pick up.
-        By not using natural color names, it is easier to write color-agnostic documents that do not make use of said connotations.
-    \item Natural color names can be cumbersome, e.g., when multiple variations of \hlc[T-Q-PH1]{blue} are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{light blue} or \hlc[T-Q-PH2]{cyan}.
+        By not using natural color names, it is easier to write colorblind-safe documents that do not make use of said connotations.
+    \item Natural color names can be cumbersome, e.g., when multiple variations of a primary color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
 \end{enumerate}
 
 These colors are used the same way as any other colors. To change the text color to \verb!T-Q-B1! for example, use \verb!\color{T-Q-B1}!.
@@ -92,14 +92,17 @@ This section provides some general rules to follow for colorblind-safe typesetti
 
 These rules apply to each visual unit of a document individually.
 A visual unit may be a graphic, a table or a paragraph of text.
-It might be advisable to be consistent also between different visual units (e.g., use the same color scheme for all graphics), but this is more of an aesthetic argument and is not necessary for a colorblind-safe document.
+It might be advisable to be consistent also between different visual units (e.g., use the same color scheme for all graphics), but this is more of an aesthetic argument and is not strictly necessary for a colorblind-safe document.
 
 The most important rules are, in this order:
 \begin{enumerate}
     \item \hlc{Do not mix the colors in qualitative schemes!}\newline
-        Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? also interferes with the packages intention of providing distinguishable colors.
+        The colors in each scheme are defined with the purpose of being easily distinguishable.
+        Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? interferes with this.
+        A special case of this is that qualitative colors should not be used for quantitative information.
+        In this case, an appropriate non-qualitative color scheme (i.e.\ a sequential or diverging scheme) should be used.
     \item \hlc{Only use colors from one color scheme for a given visual unit!}\newline
-        The colors are defined with the purpose of being easily distinguishable, but this is only true within each color scheme.
+        The colors between different schemes are not tuned to be distinguishable.
         Using colors from multiple schemes therefore defies the point of this package.
     \item \hlc{Do not use shades of colors!}\newline
         Saturation and brightness are also used for distinguishability, so mixings involving \verb!white! and \verb!black! should also be avoided.
@@ -107,11 +110,12 @@ The most important rules are, in this order:
 
 The first two rules should be ensured in any visual unit. If the need for more colors arises, a different color scheme should be used alltogether.
 While the third rule should also be followed in most scenarios, there are some situations that might allow for breaking this rule. As an example, consider \cref{fig:errorbar_plot}, where the error band is colored with a lighter shade of the original color.
+This is ok because only few colors are used in the plot and the colors are not necessary for conveying the message of the plot.
 
 \begin{figure}[ht]
     \centering
     \includegraphics{Graphics/errorbar_plot/errorbar_plot.pdf}
-    \cprotect\caption{This plot breaks rule 3 by using the shade \verb?T-Q-B5!20? for the error band of the reference.}
+    \cprotect\caption{This plot breaks rule 3 by using the shade \verb?T-Q-B5!20? for the error band of the reference, but it is still colorblind-safe.}
     \label{fig:errorbar_plot}
 \end{figure}
 
