@@ -4,6 +4,8 @@
 \RequirePackage{xcolor}
 \RequirePackage{ifthen}
 \RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 \DeclareOption{Tol}{
 %>>> Color schemes by Paul Tol, source: https://personal.sron.nl/~pault
@@ -118,11 +120,14 @@
     11,165,0,38;%
     0,255,255,255%
 }
+\pgfplotsset{
+    colormap={T-D-S}{color(0)=(T-D-S1) color(1)=(T-D-S2) color(2)=(T-D-S3) color(3)=(T-D-S4) color(4)=(T-D-S5) color(5)=(T-D-S6) color(6)=(T-D-S7) color(7)=(T-D-S8) color(8)=(T-D-S9) color(9)=(T-D-S10) color(10)=(T-D-S11)}
+}
 %
 % Nightfall diverging color scheme
 \providecolorset{RGB}{T-D-N}{}{%
     1,18,90,86;%
-    2,0,188,123;%
+    2,0,118,123;%
     3,35,143,157;%
     4,66,167,198;%
     5,96,188,233;%
@@ -140,6 +145,9 @@
     17,160,24,19;%
     0,255,255,255%
 }
+\pgfplotsset{
+    colormap={T-D-N}{color(0)=(T-D-N1) color(1)=(T-D-N2) color(2)=(T-D-N3) color(3)=(T-D-N4) color(4)=(T-D-N5) color(5)=(T-D-N6) color(6)=(T-D-N7) color(7)=(T-D-N8) color(8)=(T-D-N9) color(9)=(T-D-N10) color(10)=(T-D-N11) color(11)=(T-D-N12) color(12)=(T-D-N13) color(13)=(T-D-N14) color(14)=(T-D-N15) color(15)=(T-D-N16) color(16)=(T-D-N17)}
+}
 %
 % BuRd diverging color scheme
 \providecolorset{RGB}{T-D-BR}{}{%
@@ -154,6 +162,9 @@
     9,178,24,43;%
     0,255,238,153%
 }
+\pgfplotsset{
+    colormap={T-D-BR}{color(0)=(T-D-BR1) color(1)=(T-D-BR2) color(2)=(T-D-BR3) color(3)=(T-D-BR4) color(4)=(T-D-BR5) color(5)=(T-D-BR6) color(6)=(T-D-BR7) color(7)=(T-D-BR8) color(8)=(T-D-BR9)}
+}
 %
 % PRGn diverging color scheme
 \providecolorset{RGB}{T-D-PG}{}{%
@@ -167,6 +178,9 @@
     8,90,174,97;%
     9,27,120,55;%
     0,255,238,153%
+}
+\pgfplotsset{
+    colormap={T-D-PG}{color(0)=(T-D-PG1) color(1)=(T-D-PG2) color(2)=(T-D-PG3) color(3)=(T-D-PG4) color(4)=(T-D-PG5) color(5)=(T-D-PG6) color(6)=(T-D-PG7) color(7)=(T-D-PG8) color(8)=(T-D-PG9)}
 }
 %
 %<<< Diverging color schemes
@@ -185,6 +199,9 @@
     8,153,52,4;%
     9,102,37,6;%
     0,136,136,136%
+}
+\pgfplotsset{
+    colormap={T-S-YOB}{color(0)=(T-S-YOB1) color(1)=(T-S-YOB2) color(2)=(T-S-YOB3) color(3)=(T-S-YOB4) color(4)=(T-S-YOB5) color(5)=(T-S-YOB6) color(6)=(T-S-YOB7) color(7)=(T-S-YOB8) color(8)=(T-S-YOB9)}
 }
 %
 % Iridescent sequential color scheme
@@ -214,6 +231,9 @@
     23,70,53,58;%
     0,153,153,153%
 }
+\pgfplotsset{
+    colormap={T-S-IR}{color(0)=(T-S-IR1) color(1)=(T-S-IR2) color(2)=(T-S-IR3) color(3)=(T-S-IR4) color(4)=(T-S-IR5) color(5)=(T-S-IR6) color(6)=(T-S-IR7) color(7)=(T-S-IR8) color(8)=(T-S-IR9) color(9)=(T-S-IR10) color(10)=(T-S-IR11) color(11)=(T-S-IR12) color(12)=(T-S-IR13) color(13)=(T-S-IR14) color(14)=(T-S-IR15) color(15)=(T-S-IR16) color(16)=(T-S-IR17) color(17)=(T-S-IR18) color(18)=(T-S-IR19) color(19)=(T-S-IR20) color(20)=(T-S-IR21) color(21)=(T-S-IR22) color(22)=(T-S-IR23)}
+}
 %
 % Incandescent sequential color scheme
 \providecolorset{RGB}{T-S-IN}{}{%
@@ -229,6 +249,9 @@
     10,228,5,21;%
     11,168,0,3;%
     0,136,136,136%
+}
+\pgfplotsset{
+    colormap={T-S-IN}{color(0)=(T-S-IN1) color(1)=(T-S-IN2) color(2)=(T-S-IN3) color(3)=(T-S-IN4) color(4)=(T-S-IN5) color(5)=(T-S-IN6) color(6)=(T-S-IN7) color(7)=(T-S-IN8) color(8)=(T-S-IN9) color(9)=(T-S-IN10) color(10)=(T-S-IN11)}
 }
 %
 % Discrete rainbow color scheme
@@ -287,6 +310,9 @@
     34,82,26,19;%
     0,102,102,102%
 }
+\pgfplotsset{
+    colormap={T-S-SR}{color(0)=(T-S-SR1) color(1)=(T-S-SR2) color(2)=(T-S-SR3) color(3)=(T-S-SR4) color(4)=(T-S-SR5) color(5)=(T-S-SR6) color(6)=(T-S-SR7) color(7)=(T-S-SR8) color(8)=(T-S-SR9) color(9)=(T-S-SR10) color(10)=(T-S-SR11) color(11)=(T-S-SR12) color(12)=(T-S-SR13) color(13)=(T-S-SR14) color(14)=(T-S-SR15) color(15)=(T-S-SR16) color(16)=(T-S-SR17) color(17)=(T-S-SR18) color(18)=(T-S-SR19) color(19)=(T-S-SR20) color(20)=(T-S-SR21) color(21)=(T-S-SR22) color(22)=(T-S-SR23) color(23)=(T-S-SR24) color(24)=(T-S-SR25) color(25)=(T-S-SR26) color(26)=(T-S-SR27) color(27)=(T-S-SR28) color(28)=(T-S-SR29) color(29)=(T-S-SR30) color(30)=(T-S-SR31) color(31)=(T-S-SR32) color(32)=(T-S-SR33) color(33)=(T-S-SR34)}
+}
 %
 %<<< Sequential color schemes
 %
@@ -311,11 +337,10 @@
 \DeclareOption*{\PackageWarning{colorblind}{Unknown '\CurrentOption'}}
 \ProcessOptions\relax
 
-%>>> Function to print a color scheme
+%>>> Function to print a discrete color scheme
 \newcommand\@drawSchemeRadius{0.7cm}
 \newcommand\@drawSchemeOffset{1cm}
 \newcounter{ColorNum}
-\makeatletter
 \newcommand\drawScheme[1]{%
     \tikz{%
         \node[inner sep=1, fill=red] at (-1.2*\@drawSchemeRadius,2.3*\@drawSchemeRadius) {R};
@@ -353,7 +378,15 @@
         \node[rotate=25, anchor=north east] at (\value{ColorNum}*\@drawSchemeOffset-0.5*\@drawSchemeOffset, -1*\@drawSchemeRadius) {#10};%
     }%
 }
-\makeatother
-%<<< Function to print a color scheme
+%<<< Function to print a discrete color scheme
+
+%>>> Function to print a continuous color scheme
+\newcommand\drawSchemeC[2][0.5\textwidth]{%
+    \tikz{%
+        \pgfplotscolorbardrawstandalone[colormap name=#2, colorbar horizontal, colorbar style={width=#1, ticks=none}]%
+        \draw[fill=#20] (#1+0.5*\@drawSchemeOffset,-0.55cm) circle(0.5*\@drawSchemeRadius);%
+    }%
+}
+%<<< Function to print a continuous color scheme
 
 \endinput
