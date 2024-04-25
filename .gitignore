@@ -1,0 +1,9 @@
+*
+!.gitignore
+!*.tex
+!*.sty
+!*.bib
+!*.md
+!Graphics/
+!Graphics/*
+!main.pdf

@@ -8,7 +8,6 @@
 \usepackage{tikz}
 \usetikzlibrary{math}
 
-\usepackage{xcolor}
 \usepackage{soul}
 
 \usepackage{hyperref}
@@ -289,16 +288,17 @@ Note that this command only works for color schemes that are allowed to be inter
 \let\oldcolor\color
 
 \newcommand\normalvision{%
-    \protect\renewcommand\color[1]{\oldcolor{##1}}%
+    \def\color##1{\oldcolor{##1}}%
 }
 
 \newcommand\protanopia{%
-    \protect\renewcommand\color[1]{%
+    \def\color##1{%
         \extractcolorspecs{##1}{\modelspec}{\colorspec}%
-        \tikzmath{
-            \r = array({\colorspec},0);
-            \g = array({\colorspec},1);
-            \b = array({\colorspec},2);
+        \convertcolorspec{\modelspec}{\colorspec}{rgb}{\rgbcolorspec}%
+        \tikzmath{ %TODO: change this to LaTeX3
+            \r = array({\rgbcolorspec},0);
+            \g = array({\rgbcolorspec},1);
+            \b = array({\rgbcolorspec},2);
             \rp = pow(0.06425 + 0.677*pow(\g, 2.2) + 0.2802*pow(\r, 2.2), 1./2.2);
             \gp = pow(0.06425 + 0.677*pow(\g, 2.2) + 0.2802*pow(\r, 2.2), 1./2.2);
             \bp = pow(0.06425 + 0.95724*pow(\b, 2.2) + 0.02138*pow(\g, 2.2) - 0.02138*pow(\r, 2.2), 1./2.2);
@@ -308,12 +308,13 @@ Note that this command only works for color schemes that are allowed to be inter
 }
 
 \newcommand\deuteranopia{%
-    \protect\renewcommand\color[1]{%
+    \def\color##1{%
         \extractcolorspecs{##1}{\modelspec}{\colorspec}%
-        \tikzmath{
-            \r = array({\colorspec},0);
-            \g = array({\colorspec},1);
-            \b = array({\colorspec},2);
+        \convertcolorspec{\modelspec}{\colorspec}{rgb}{\rgbcolorspec}%
+        \tikzmath{ %TODO: change this to LaTeX3
+            \r = array({\rgbcolorspec},0);
+            \g = array({\rgbcolorspec},1);
+            \b = array({\rgbcolorspec},2);
             \rp = pow(0.01194 + 0.8806*pow(\g, 2.2) + 0.1115*pow(\r, 2.2), 1./2.2);
             \gp = pow(0.01194 + 0.8806*pow(\g, 2.2) + 0.1115*pow(\r, 2.2), 1./2.2);
             \bp = pow(0.01194 + 0.992052*pow(\b, 2.2) - 0.003974*pow(\g, 2.2) + 0.003974*pow(\r, 2.2), 1./2.2);
@@ -344,6 +345,8 @@ Note that this command only works for color schemes that are allowed to be inter
 
         \fill[hsbtest1] (8*\dx,0) circle (\radius);
         \fill[hsbtest2] (9*\dx,0) circle (\radius);
+        \fill[yellow] (10*\dx,0) circle (\radius);
+        \fill[red!50!green] (11*\dx,0) circle (\radius);
 
         {
         \protanopia
@@ -366,7 +369,10 @@ Note that this command only works for color schemes that are allowed to be inter
             (8*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         \fill[hsbtest2, rounded corners=0.7*\radius cm]
             (9*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
-
+        \fill[yellow, rounded corners=0.7*\radius cm]
+            (10*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
+        \fill[red!50!green, rounded corners=0.7*\radius cm]
+            (11*\dx-\radius,\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         }
 
         {
@@ -390,17 +396,13 @@ Note that this command only works for color schemes that are allowed to be inter
             (8*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         \fill[hsbtest2, rounded corners=0.7*\radius cm]
             (9*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
+        \fill[yellow, rounded corners=0.7*\radius cm]
+            (10*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
+        \fill[red!50!green, rounded corners=0.7*\radius cm]
+            (11*\dx-\radius,1.8*\dy-0.7*\radius) rectangle ++(2*\radius, 1.4*\radius);
         }
     \end{tikzpicture}
     \caption{Test for deuteranopia and tritanopia commands: Left shows Tol's bright qualitative scheme, with deuteranopia and tritanopia vision in the second and third row. Right shows two colors with the same numbers in rgb and hsb, where the hsb variant gets translated incorrectly to color-deficient visions.}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Ishihara_9.png}
-    \hspace{1cm}
-    \includegraphics[decodearray={0 0 0 1 0 1}, width=0.3\textwidth]{Ishihara_9.png}
-    \caption{Ishihara colorblindness test, normal vision and without the {\color{red}red} channel.}
 \end{figure}
 
 \clearpage
