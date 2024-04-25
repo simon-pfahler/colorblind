@@ -389,4 +389,44 @@
 }
 %<<< Function to print a continuous color scheme
 
+%>>> experimental stuff
+\let\oldcolor\color
+
+\newcommand\normalvision{%
+    \def\color##1{\oldcolor{##1}}%
+}
+
+\newcommand\protanopia{%
+    \def\color##1{%
+        \extractcolorspecs{##1}{\modelspec}{\colorspec}%
+        \convertcolorspec{\modelspec}{\colorspec}{rgb}{\rgbcolorspec}%
+        \tikzmath{ %TODO: change this to LaTeX3
+            \r = array({\rgbcolorspec},0);
+            \g = array({\rgbcolorspec},1);
+            \b = array({\rgbcolorspec},2);
+            \rp = pow(0.06425 + 0.677*pow(\g, 2.2) + 0.2802*pow(\r, 2.2), 1./2.2);
+            \gp = pow(0.06425 + 0.677*pow(\g, 2.2) + 0.2802*pow(\r, 2.2), 1./2.2);
+            \bp = pow(0.06425 + 0.95724*pow(\b, 2.2) + 0.02138*pow(\g, 2.2) - 0.02138*pow(\r, 2.2), 1./2.2);
+        }%
+        \oldcolor[rgb]{\rp,\gp,\bp}%
+    }%
+}
+
+\newcommand\deuteranopia{%
+    \def\color##1{%
+        \extractcolorspecs{##1}{\modelspec}{\colorspec}%
+        \convertcolorspec{\modelspec}{\colorspec}{rgb}{\rgbcolorspec}%
+        \tikzmath{ %TODO: change this to LaTeX3
+            \r = array({\rgbcolorspec},0);
+            \g = array({\rgbcolorspec},1);
+            \b = array({\rgbcolorspec},2);
+            \rp = pow(0.01194 + 0.8806*pow(\g, 2.2) + 0.1115*pow(\r, 2.2), 1./2.2);
+            \gp = pow(0.01194 + 0.8806*pow(\g, 2.2) + 0.1115*pow(\r, 2.2), 1./2.2);
+            \bp = pow(0.01194 + 0.992052*pow(\b, 2.2) - 0.003974*pow(\g, 2.2) + 0.003974*pow(\r, 2.2), 1./2.2);
+        }%
+        \oldcolor[rgb]{\rp,\gp,\bp}%
+    }%
+}
+%<<< experimental stuff
+
 \endinput
