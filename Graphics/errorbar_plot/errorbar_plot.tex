@@ -1,5 +1,9 @@
+%%
+%% ----------------------------------------------------------------
+%% Copyright (C) 2023-2024 by Simon Pfahler <simon.pfahler at ur dot de>
+%% ----------------------------------------------------------------
+%%
 %! TeX program = lualatex
-
 \documentclass[tikz]{standalone}
 
 \usepackage{amsmath}
@@ -28,10 +32,6 @@
         sharp plot,
         ##1
       ] plot coordinates {(0.3cm, -0.15cm) (0.3cm, 0.15cm)};%
-      %\pgfkeysalso{%
-        %/pgfplots/error bars/draw error bar={(0.3cm, 0cm)}{(0.3cm, 0.15cm)},
-        %/pgfplots/error bars/draw error bar={(0.3cm, 0cm)}{(0.3cm, -0.15cm)},
-      %};
     }
   }
 }

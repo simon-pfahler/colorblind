@@ -1,3 +1,8 @@
+%%
+%% ----------------------------------------------------------------
+%% Copyright (C) 2023-2024 by Simon Pfahler <simon.pfahler at ur dot de>
+%% ----------------------------------------------------------------
+%%
 %! TeX program = lualatex
 \documentclass{scrartcl}
 \usepackage[left=4cm,right=3cm,top=3cm,bottom=3cm, marginpar=3cm]{geometry}
@@ -37,7 +42,7 @@
 
 \title{Easy colorblind-safe typesetting:\\ the \colorblind package}
 \author{Simon Pfahler}
-\date{\today\\Version 0.1}
+\date{\today\\Version 1.0}
 
 
 \begin{document}
@@ -49,19 +54,21 @@
     This package provides the tools necessary for colorblind-safe typesetting in \LaTeX.
     It provides color schemes for a wide range of applications.
     The most commonly used schemes are qualitative schemes, providing easily distinguishable colors for use in graphics, but also for text coloring or highlighting.
-    Additionally, diverging and sequential schemes are included which can be used for encoding quantitative information in the colors of a graphic.
-    Therefore, colorblind-safeness is incorporated into the writing process, making it both less cumbersome and less error-prone.
+    Additionally, diverging and sequential schemes are included which can be used for encoding quantitative information using colors.
+    This package incorporates colorblind-safeness into the writing process, making it both less cumbersome and less error-prone.
 \end{abstract}
 
 \tableofcontents
 \clearpage
 
 \section{Introduction}
+\subsection{Package options}
 \cprotect\marg{\verb!Tol!\\\verb!OkabeIto!}%
 The \colorblind package provides the color schemes by Paul Tol~\cite{Tol} and the Okabe Ito color palette~\cite{Ichihara_2008}.
 By default, no schemes are loaded.
 Providing one of the options \verb!Tol! or \verb!OkabeIto! loads all corresponding schemes.
 
+\subsection{Overview}
 As an example for how to use the colors, we look at the \emph{bright qualitative} color scheme by Tol.
 \cref{fig:T-Q-Bexample} shows the colors in the scheme
 
@@ -76,10 +83,10 @@ All colors in this model start with \verb!T-Q-B!, indicating that it is a scheme
 The colors in the scheme are specified by a number following the scheme name, in this case ranging from \verb!T-Q-B1! to \verb!T-Q-B6! for the non-grey colors.
 The additional color \verb!T-Q-B0! provides a color that can be used, e.g., to indicate bad data.
 
-There are two reasons why color names are not based on natural color names (e.g., \hlc[T-Q-PH1]{blue}):
+There are two reasons why color names are not based on natural color names (e.g., ``\hlc[T-Q-PH1]{blue}''):
 \begin{enumerate}
     \item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
-        This meaning is difficult for people with color deficiencies to pick up.
+        This meaning is difficult for people with color vision deficiencies to pick up.
         By not using natural color names, it is easier to write colorblind-safe documents that do not make use of said connotations.
     \item Natural color names can be cumbersome, e.g., when multiple variations of a primary color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
 \end{enumerate}
@@ -94,13 +101,13 @@ These rules apply to each visual unit of a document individually.
 A visual unit may be a graphic, a table or a paragraph of text.
 It might be advisable to be consistent also between different visual units (e.g., use the same color scheme for all graphics), but this is more of an aesthetic argument and is not strictly necessary for a colorblind-safe document.
 
-The most important rules are, in this order:
+The most important rules are:
 \begin{enumerate}
     \item \hlc{Do not mix the colors in qualitative schemes!}\newline
         The colors in each scheme are defined with the purpose of being easily distinguishable.
         Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? interferes with this.
-        A special case of this is that qualitative colors should not be used for quantitative information.
-        In this case, an appropriate non-qualitative color scheme (i.e.\ a diverging or sequential scheme) should be used.
+        A special case of this is that qualitative colors should not be mixed in order to convey quantitative information.
+        In this case, a suitable non-qualitative color scheme (i.e.\ a diverging or sequential scheme) should be used.
     \item \hlc{Only use colors from one color scheme for a given visual unit!}\newline
         The colors between different schemes are not tuned to be distinguishable.
         Using colors from multiple schemes therefore defies the point of this package.
@@ -120,7 +127,7 @@ This is ok because only few colors are used in the plot and the colors are not n
 \end{figure}
 
 There are additional guidelines that should be kept in mind when typesetting colorblind-safe documents.
-Depending on the specific visual unit, they are usually not as vital as the rules stated above.
+Their importance may vary between different applications, so try to follow them as best as possible, at your own judgement.
 In no particular order, they are:
 \begin{itemize}
     \item \hlc{Do not convey information only through color!}\newline
@@ -129,9 +136,9 @@ In no particular order, they are:
         Color is often also used for aesthetic reasons, e.g., on a scientific poster.
         While this is ok in principle, do not mix information and aesthetics within the same visual unit, as this makes it more difficult to extract the encoded information.
     \item \hlc{Do not use rainbow color schemes!}\newline
-        Due to the many different colors in a rainbow color scheme, they are very difficult to distinguish for people with color deficiencies.
-        Therefore, it is best to avoid them alltogether.
-        If you insist on using them, Paul Tol provides both a sequential as well as a continuous version, which are optimized to be as distinguishable as possible for any color vision.
+        Due to the many different colors in a rainbow color scheme, they are very difficult to distinguish for people with color vision deficiencies (even when the scheme is tuned for this purpose).
+        Therefore, it is best to avoid them.
+        If you insist on using them, Paul Tol provides both a sequential as well as a continuous version, which are optimized to be as distinguishable as possible.
 \end{itemize}
 
 \section{Provided color schemes}\label{sec:colors}
@@ -139,18 +146,19 @@ The color schemes provided are split into three groups:
 \begin{itemize}
     \item Qualitative schemes:\newline
         These schemes are used to convey qualitative information, such as different data sources, countries or manufacturers.
-        They should usually be used for coloring text or distinguishing different lines in a plot.
+        They should usually be used for coloring text or distinguishing different lines/bars in a plot.
     \item Diverging color schemes:\newline
         When quantitative data ranges between two extremes, and the middle is being considered ``neutral'', a diverging color scheme should be used.
         Examples for this kind of data might be test grades, temperatures or pH values.
     \item Sequential color schemes:\newline
         For quantitative data without an important midpoint, sequential color schemes should be preferred over diverging ones.
+        This is especially true for quantites that start from $0$.
         They can be used to denote for example velocities, concentrations or pressures.
 \end{itemize}
 
-For each of these schemes, this package provides a range of options.
+For each type of schemes, this package provides a range of options.
 \Cref{sec:Tol_schemes} shows the schemes designed by Paul Tol~\cite{Tol}, which include qualitative, diverging and sequential schemes (see \cref{sec:T-Q,sec:T-D,sec:T-S}).
-In \cref{sec:OkabeIto}, the Okabe Ito color scheme~\cite{Ichihara_2008} is provided, which is probably the most famous qualitative colorblind-safe color scheme due to various articles in high-ranking journals.
+In \cref{sec:OkabeIto}, the Okabe Ito color scheme~\cite{Ichihara_2008} is provided, which is probably the most famous qualitative colorblind-safe color scheme due to it being mentioned in various articles in high-ranking journals.
 
 All of the schemes are colorblind-safe, and some are optimized for printout or designed for a particular purpose.
 This is denoted under the scheme name.\clearpage
@@ -161,72 +169,72 @@ This is denoted under the scheme name.\clearpage
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-B}}\\
-    Bright\\
+    \textbf{B}right\\
     \phantom{pb}
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-V}}\\
-    Vibrant
+    \textbf{V}ibrant
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-HC}}\\
-    High-Contrast\\
+    \textbf{H}igh-\textbf{C}ontrast\\
     works for black and white printout
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-MC}}\\
-    Medium-Contrast\\
+    \textbf{M}edium-\textbf{C}ontrast\\
     works for black and white printout
 \end{minipage}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-Q-M}}\\
-    Muted
+    \textbf{M}uted
 \end{center}
 
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-PH}}\\
-    Pale Highlight\\
+    \textbf{P}ale \textbf{H}ighlight\\
     specifically for text background
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
     \centering
     \scalebox{0.7}{\drawScheme{T-Q-DT}}\\
-    Dark Text\\
+    \textbf{D}ark \textbf{T}ext\\
     specifically for text color
 \end{minipage}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-Q-L}}\\
-    Light\\
+    \textbf{L}ight\\
     less distinguishable than other schemes,\\ mostly meant for filling in labelled cells
 \end{center}\clearpage
 
 \subsubsection{Diverging color schemes}\label{sec:T-D}
 For diverging schemes, when a continuous palette is needed, the colors are allowed to be linearly interpolated.
-When using \verb!pgfplots!, the interpolations are available as colormaps with the names of their color scheme.
+When using \verb!pgfplots! (or \verb!TikZ!), the interpolations are available as colormaps with the names of their color scheme.
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-S}}\\
     \drawSchemeC[0.6\textwidth]{T-D-S}\\
-    Sunset
+    \textbf{S}unset
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-N}}\\
     \drawSchemeC[0.9\textwidth]{T-D-N}\\
-    Nightfall
+    \textbf{N}ightfall
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-BR}}\\
     \drawSchemeC[0.5\textwidth]{T-D-BR}\\
-    BuRd
+    \textbf{B}u\textbf{R}d
 \end{center}\clearpage
 
 \subsubsection{Sequential color schemes}\label{sec:T-S}
@@ -239,30 +247,30 @@ When the discrete scheme is not shown, this is because there are too many colors
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-S-YOB}}\\
     \drawSchemeC[0.5\textwidth]{T-S-YOB}\\
-    YlOrBr
+    \textbf{Y}l\textbf{O}r\textbf{B}r
 \end{center}
 
 \begin{center}
-    \drawSchemeC[\textwidth]{T-S-IR}\\
-    IRidescent
+    \drawSchemeC[0.9\textwidth]{T-S-IR}\\
+    \textbf{Ir}idescent
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-S-IN}}\\
     \drawSchemeC[0.6\textwidth]{T-S-IN}\\
-    INcandescent\\
+    \textbf{In}candescent\\
     not print-friendly
 \end{center}
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-S-DR}}\\
-    Discrete Rainbow\\
+    \textbf{D}iscrete \textbf{R}ainbow\\
     Do not interpolate!
 \end{center}
 
 \begin{center}
     \drawSchemeC[\textwidth]{T-S-SR}\\
-    Smooth Rainbow\\
+    \textbf{S}mooth \textbf{R}ainbow\\
 \end{center}
 
 \subsection{Okabe Ito qualitative color scheme}\label{sec:OkabeIto}
@@ -270,10 +278,10 @@ This is the qualitative color scheme commonly known as the \emph{Okabe Ito} colo
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{OI}}\\
-    Okabe Ito
+    \textbf{O}kabe \textbf{I}to
 \end{center}
 
-\subsection{Provided commands}
+\section{Provided commands}
 \cprotect\marg{\verb!\drawScheme{...}!}%
 The discrete visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
 The name of the color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the \emph{qualitative bright} scheme by Tol.
