@@ -3,5 +3,9 @@ https://github.com/simon-pfahler/colorblind/issues
 
 History
 =======
+2024/05/16 v1.0.1
+* Add package options `pgf` and `no-tikz` to give more control over which
+packages are loaded
+
 2024/05/12 v1.0
 * Initial published release
