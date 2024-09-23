@@ -4,12 +4,12 @@
 %% ----------------------------------------------------------------
 %%
 %! TeX program = lualatex
+\DocumentMetadata{lang = en-us}
 \documentclass{scrartcl}
 \usepackage[left=4cm,right=3cm,top=3cm,bottom=3cm, marginpar=3cm]{geometry}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex}
 
-\usepackage{cprotect}
 \usepackage{tikz}
 \usetikzlibrary{math}
 
@@ -72,6 +72,7 @@
 \reversemarginpar
 \newcommand\marg[1]{\leavevmode\marginpar{\raggedleft #1}}
 \newcommand\tbs{\textbackslash}
+\newcommand\cs[1]{\texttt{\tbs#1}}
 
 \title{Easy colorblind-safe typesetting:\\ the \colorblind package}
 \author{Simon Pfahler}
@@ -84,10 +85,10 @@
 
 \begin{abstract}
     In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
-    This package provides the tools necessary for colorblind-safe typesetting in \LaTeX.
+    This package provides some useful tools for colorblind-safe typesetting in \LaTeX.
     It provides color schemes for a wide range of applications.
     The most commonly used schemes are qualitative schemes, providing easily distinguishable colors for use in graphics, but also for text coloring or highlighting.
-    Additionally, diverging and sequential schemes are included which can be used for encoding quantitative information using colors.
+    Additionally, diverging and sequential schemes are provided, which can be used for encoding quantitative information using colors.
     This package incorporates colorblind-safeness into the writing process, making it both less cumbersome and less error-prone.
 \end{abstract}
 
@@ -96,23 +97,23 @@
 
 \section{Introduction}
 \subsection{Package options}
-\cprotect\marg{\verb!Tol!\\\verb!OkabeIto!}%
+\marg{\texttt{Tol}\\\texttt{OkabeIto}}%
 The \colorblind package provides the color schemes by Paul Tol~\cite{Tol} and the Okabe Ito color palette~\cite{Ichihara_2008}.
 By default, no schemes are loaded.
-Providing one of the options \verb!Tol! or \verb!OkabeIto! loads all corresponding schemes.
+Providing one of the options \texttt{Tol} or \texttt{OkabeIto} loads all corresponding schemes.
 
-\cprotect\marg{\verb!pgf!}%
-If the option \verb!pgf! is provided, continuous colormaps are defined for use with \verb!pgfplots! (or \verb!TikZ!).
-Also, the command \verb!\drawSchemeC! for drawing continuous color schemes is only defined when the option is provided and continuous color schemes are available (through providing the \verb!Tol! option).
+\marg{\texttt{pgf}}%
+If the option \texttt{pgf} is provided, continuous colormaps are defined for use with \texttt{pgfplots} (or \texttt{TikZ}).
+Also, the command \cs{drawSchemeC} for drawing continuous color schemes is only defined when the option is provided and continuous color schemes are available (through providing the \texttt{Tol} option).
 Continuous versions of color schemes are only available when the colors are allowed to be interpolated, see below for details.
 
-\cprotect\marg{\verb!no-tikz!}%
-The package uses \verb!TikZ! to draw the discrete versions of color schemes.
-Providing the option \verb!no-tikz! disables this, the command \verb!\drawScheme! is not defined in this case.
+\marg{\texttt{no-tikz}}%
+The package uses \texttt{TikZ} to draw the discrete versions of color schemes.
+Providing the option \texttt{no-tikz} disables this, the command \cs{drawScheme} is not defined in this case.
 
 \subsection{Overview}
 As an example for how to use the colors, we look at the \emph{bright qualitative} color scheme by Tol.
-\cref{fig:T-Q-Bexample} shows the colors in the scheme
+\cref{fig:T-Q-Bexample} shows the colors in the scheme.
 
 \begin{figure}[ht]
     \centering
@@ -121,102 +122,80 @@ As an example for how to use the colors, we look at the \emph{bright qualitative
     \label{fig:T-Q-Bexample}
 \end{figure}
 
-All colors in this model start with \verb!T-Q-B!, indicating that it is a scheme by \textbf{T}ol, that it is a \textbf{q}ualitative scheme, and that it is the \textbf{b}right scheme.
-The colors in the scheme are specified by a number following the scheme name, in this case ranging from \verb!T-Q-B1! to \verb!T-Q-B6! for the non-grey colors.
-The additional color \verb!T-Q-B0! provides a color that can be used, e.g., to indicate bad data.
+All colors in this model start with \texttt{T-Q-B}, indicating that it is a scheme by \textbf{T}ol, that it is a \textbf{q}ualitative scheme, and that it is the \textbf{b}right scheme.
+The colors in the scheme are specified by a number following the scheme name, in this case ranging from \texttt{T-Q-B1} to \texttt{T-Q-B6} for the non-grey colors.
+The additional color \texttt{T-Q-B0} provides a color that can be used, e.g., to indicate bad data.
 
 There are two reasons why color names are not based on natural color names (e.g., ``\hlc[T-Q-PH1]{blue}''):
 \begin{enumerate}
     \item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
         This meaning is difficult for people with color vision deficiencies to pick up.
         By not using natural color names, it is easier to write colorblind-safe documents that do not make use of said connotations.
-    \item Natural color names can be cumbersome, e.g., when multiple variations of a primary color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
+    \item Natural color names can be cumbersome, e.g., when slight variations of a color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
 \end{enumerate}
 
-These colors are used the same way as any other colors. To change the text color to \verb!T-Q-B1! for example, use \verb!\color{T-Q-B1}!.
+These colors are used the same way as any other colors. To change the text color to \texttt{T-Q-B1} for example, use \cs{color\{T-Q-B1\}}.
 
-\section{Guidelines}
-On its own, using colorblind-safe colors is not sufficient for making a document truly colorblind-safe.
-This section provides some general rules to follow for colorblind-safe typesetting.
+\section{Guidelines}\label{sec:guidelines}
+In this section, we provide some general guidelines for colorblind-safe design.
 
-These rules apply to each visual unit of a document individually.
-A visual unit may be a graphic, a table or a paragraph of text.
-It might be advisable to be consistent also between different visual units (e.g., use the same color scheme for all graphics), but this is more of an aesthetic argument and is not strictly necessary for a colorblind-safe document.
+Color vision deficiencies apper in many different variations and grades of severity, up to monochromacy, where different colors can only be distinguished via their perceived brightness.
+This means that while the color schemes provided by this package are easier to distinguish for the most common color vision deficiencies, information encoded only in color can never be truely colorblind safe.
+This leads us to the most important rule in colorblind-safe design:
+\begin{center}
+    \setlength{\fboxrule}{1pt}
+    \textbf{Rule 1}:
+    \fbox{\parbox{0.65\columnwidth}{
+        Always provide information in more ways than just color.
+    }}
+\end{center}
 
-The most important rules are:
-\begin{enumerate}
-    \item \hlc{Do not mix the colors in qualitative schemes!}\newline
-        The colors in each scheme are defined with the purpose of being easily distinguishable.
-        Mixing of colors, e.g., \verb?T-Q-B1!50!T-Q-B5? interferes with this.
-        A special case of this is that qualitative colors should not be mixed in order to convey quantitative information.
-        In this case, a suitable non-qualitative color scheme (i.e.\ a diverging or sequential scheme) should be used.
-    \item \hlc{Only use colors from one color scheme for a given visual unit!}\newline
-        The colors between different schemes are not tuned to be distinguishable.
-        Using colors from multiple schemes therefore defies the point of this package.
-    \item \hlc{Do not use shades of colors!}\newline
-        Saturation and brightness are also used for distinguishability, so mixings involving \verb!white! and \verb!black! should also be avoided.
-\end{enumerate}
+If this rule is satisfied in a document, it is by construction guaranteed to be colorblind-safe.
+However, this does not mean that it is \emph{convenient} for people with color vision deficiencies to extract the information.
+In order to achieve the best possible result, a few more rules should be considered when using color.
+\begin{center}
+    \setlength{\fboxrule}{1pt}
+    \textbf{Rule 2}:
+    \fbox{\parbox{0.65\columnwidth}{
+        Stick to a color scheme.
+        \begin{itemize}
+            \item[(\textbf{a})] Do not mix colors within a scheme.
+            \item[(\textbf{b})] Do not use shades of colors.
+        \end{itemize}
+    }}
+\end{center}
 
-The first two rules should be ensured in any visual unit. If the need for more colors arises, a different color scheme should be used alltogether.
-While the third rule should also be followed in most scenarios, there are some situations that might allow for breaking this rule. As an example, consider \cref{fig:errorbar_plot}, where the error band is colored with a lighter shade of the original color.
-This is ok because only few colors are used in the plot and the colors are not necessary for conveying the message of the plot.
+Colors within colorblind-safe color schemes are designed to be eaily distinguishable for people with the most common color vision deficiencies, so we should only use colors from one color scheme in any given visual unit.
+In extension, even colors from the same scheme should not be mixed, since this makes it harder to distinguish them.
+Even if the result of the mixing is easily distinguishable for people with normal color vision, the same might not be true under certain color vision deficiencies.
+For the same reaseon, shades of colors (i.e.\ mixings with black or white) should be avoided, because the brightness of colors is also used to make sure the colors are distinguishable.
 
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=0.4*\w,
-        height=0.28*\w,
-        scale only axis=true,
-        xlabel = {x},
-        ylabel = {y},
-        x label style = {yshift=2mm},
-        y label style = {yshift=-2mm},
-        clip marker paths=true,
-        axis on top
-        ]
+\begin{center}
+    \setlength{\fboxrule}{1pt}
+    \textbf{Rule 3}:
+    \fbox{\parbox{0.65\columnwidth}{
+        Do not use color for information and aesthetics simultaneously.
+    }}
+\end{center}
 
-        \fill[T-Q-B5!20] (0,0.1068558) -- (40,0.1068558) -- (40,0.0668558) -- (0,0.0668558) -- cycle;
-        \draw[T-Q-B5] (0,0.0868558) -- (40,0.0868558);
+Color is often also used for aesthetic reasons, e.g., on a scientific poster.
+This is usually unproblematic, as the color does not convey information in this case.
+However, if color is used to convey information in a visual unit, avoid using additional color for aesthetic purposes, as this makes it more difficult to extract the information encoded in the color.
 
-        \addplot[color=T-Q-B1, mark=*, only marks, forget plot]
-            plot[/pgfplots/error bars/.cd, x dir=none, y dir=both, y explicit,
-                error mark=-, error bar style={color=T-Q-B1}]
-            coordinates {
-                (4,0.263148) +- (0.120064,0.120064)
-                (8,0.159158) +- (0.0621894,0.0621894)
-                (12,0.129892) +- (0.0543303,0.0543303)
-                (16,0.112302) +- (0.0358508,0.0358508)
-                (20,0.098435) +- (0.02648,0.02648)
-                (24,0.0909784) +- (0.0215048,0.0215048)
-                (28,0.0894657) +- (0.0212992,0.0212992)
-                (32,0.0869343) +- (0.0202553,0.0202553)
-            };
-        \addlegendimage{T-Q-B1, mark=*, only marks, error bar legend};
-        \addlegendentry{data};
-        \addlegendimage{draw=T-Q-B5, fill=T-Q-B5!20, custom area legend};
-        \addlegendentry{reference};
+\begin{center}
+    \setlength{\fboxrule}{1pt}
+    \textbf{Rule 4}:
+    \fbox{\parbox{0.65\columnwidth}{
+        Do not use rainbow color schemes.
+    }}
+\end{center}
 
-    \end{axis}
-    \end{tikzpicture}
-    \cprotect\caption{This plot breaks rule 3 by using the shade \verb?T-Q-B5!20? for the error band of the reference, but it is still colorblind-safe.}
-    \label{fig:errorbar_plot}
-\end{figure}
+Due to the many different colors in a rainbow color scheme, they are inevitably difficult to distinguish for people with color vision deficiencies.
+Therefore, it is best to avoid them.
+If a rainbow color scheme has to be used at all cost, Paul Tol (and thus also the \texttt{colorblind} package) provides both a discrete as well as a continuous version~\cite{Tol}, which are optimized to be as distinguishable as possible.
 
-There are additional guidelines that should be kept in mind when typesetting colorblind-safe documents.
-Their importance may vary between different applications, so try to follow them as best as possible, at your own judgement.
-In no particular order, they are:
-\begin{itemize}
-    \item \hlc{Do not convey information only through color!}\newline
-        When possible, encode the information the color provides also in a different way, e.g., through text, patterns or symbols.
-    \item \hlc{Do not use color for information and aesthetics simultaneously!}\newline
-        Color is often also used for aesthetic reasons, e.g., on a scientific poster.
-        While this is ok in principle, do not mix information and aesthetics within the same visual unit, as this makes it more difficult to extract the encoded information.
-    \item \hlc{Do not use rainbow color schemes!}\newline
-        Due to the many different colors in a rainbow color scheme, they are very difficult to distinguish for people with color vision deficiencies (even when the scheme is tuned for this purpose).
-        Therefore, it is best to avoid them.
-        If you insist on using them, Paul Tol provides both a sequential as well as a continuous version, which are optimized to be as distinguishable as possible.
-\end{itemize}
+By following these four simple rules, we can ensure that the information encoded in a document is presented in a colorblind-safe way, and that it is reasonably convenient for people affected by color vision deficiencies to extract the information.
+As a side node, following these rules leads to documents that do not suffer from information loss when printed in black and white, which is usually also desirable.
 
 \section{Provided color schemes}\label{sec:colors}
 The color schemes provided are split into three groups:
@@ -293,8 +272,8 @@ This is denoted under the scheme name.\clearpage
 \end{center}\clearpage
 
 \subsubsection{Diverging color schemes}\label{sec:T-D}
-For diverging schemes, when a continuous palette is needed, the colors are allowed to be linearly interpolated.
-When using the option \verb!pgf!, the interpolations are available as colormaps with the names of their color scheme.
+For diverging schemes, when a continuous scheme is needed, the colors are allowed to be linearly interpolated.
+When using the option \texttt{pgf}, the interpolations are available as colormaps with the names of their color scheme.
 
 \begin{center}
     \scalebox{0.7}{\drawScheme{T-D-S}}\\
@@ -321,9 +300,9 @@ When using the option \verb!pgf!, the interpolations are available as colormaps 
 \end{center}\clearpage
 
 \subsubsection{Sequential color schemes}\label{sec:T-S}
-For most sequential schemes, a continuous palette can be obtained again by linearly interpolating the colors.
+For most sequential schemes, a continuous scheme can be obtained again by linearly interpolating the colors.
 The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuos variation, the \emph{smooth rainbow} scheme.
-When using the option \verb!pgf!, the interpolations are available as colormaps with the names of their color scheme.
+When using the option \texttt{pgf}, the interpolations are available as colormaps with the names of their color scheme.
 
 When the discrete scheme is not shown, this is because there are too many colors in it.
 
@@ -365,15 +344,15 @@ This is the qualitative color scheme commonly known as the \emph{Okabe Ito} colo
 \end{center}
 
 \section{Provided commands}
-\cprotect\marg{\verb!\drawScheme{...}!}%
-The discrete visualizations of color schemes given in this documentation are created with the command \verb!\drawScheme{...}!.
-The name of the color scheme should be provided to the command, e.g.\ \verb!\drawScheme{T-Q-B}! to print the \emph{qualitative bright} scheme by Tol.
-Note that this command is not available when the package option \verb!no-tikz! is used.
+\marg{\cs{drawScheme\{...\}}}%
+The discrete visualizations of color schemes given in this documentation are created with the command \cs{drawScheme\{...\}}.
+The name of the color scheme should be provided to the command, e.g.\ \cs{drawScheme\{T-Q-B\}} to print the \emph{qualitative bright} scheme by Tol.
+Note that this command is not available when the package option \texttt{no-tikz} is used.
 
-\cprotect\marg{\verb!\drawSchemeC{...}!}%
-The continuous visualizations of color schemes given in this documentation are created with the command \verb!\drawSchemeC{...}!.
-The name of the color scheme should be provided to the command, e.g.\ \verb!\drawSchemeC{T-D-S}! to print the \emph{diverging sunset} scheme by Tol.
-Note that this command only works for color schemes that are allowed to be interpolated, and that the command is only available when the package option \verb!pgf! is used.
+\marg{\cs{drawSchemeC\{...\}}}%
+The continuous visualizations of color schemes given in this documentation are created with the command \cs{drawSchemeC\{...\}}.
+The name of the color scheme should be provided to the command, e.g.\ \cs{drawSchemeC\{T-D-S\}} to print the \emph{diverging sunset} scheme by Tol.
+Note that this command only works for color schemes that are allowed to be interpolated, and that the command is only available when the package option \texttt{pgf} is used.
 
 \clearpage
 \printbibliography
