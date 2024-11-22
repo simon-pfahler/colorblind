@@ -6,18 +6,15 @@
 %! TeX program = lualatex
 \DocumentMetadata{lang = en-us}
 \documentclass{scrartcl}
-\usepackage[left=4cm,right=3cm,top=3cm,bottom=3cm, marginpar=3cm]{geometry}
+\usepackage[left=4.5cm,right=3cm,top=3cm,bottom=3cm, marginpar=4cm]{geometry}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex}
-
-\usepackage{tikz}
-\usetikzlibrary{math}
 
 \usepackage{xcolor}
 \usepackage{soul}
 
 \usepackage{tikz}
-\usetikzlibrary{positioning, shapes, fit, arrows.meta, decorations.pathmorphing}
+\usetikzlibrary{positioning, shapes, fit, arrows.meta, decorations.pathmorphing, math}
 \pgfdeclarelayer{bg}
 \pgfsetlayers{bg,main}
 
@@ -84,18 +81,74 @@
 \maketitle
 
 \begin{abstract}
-    In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
-    This package provides some useful tools for colorblind-safe typesetting in \LaTeX.
-    It provides color schemes for a wide range of applications.
-    The most commonly used schemes are qualitative schemes, providing easily distinguishable colors for use in graphics, but also for text coloring or highlighting.
-    Additionally, diverging and sequential schemes are provided, which can be used for encoding quantitative information using colors.
-    This package incorporates colorblind-safeness into the writing process, making it both less cumbersome and less error-prone.
+	In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
+	This package provides some useful tools for colorblind-safe typesetting in \LaTeX.
+	It provides color schemes for a wide range of applications.
+	The most commonly used schemes are qualitative schemes, providing easily distinguishable colors for use in graphics, but also for text coloring or highlighting.
+	Additionally, diverging and sequential schemes are provided, which can be used for encoding quantitative information using colors.
+	This package incorporates colorblind-safeness into the writing process, making it both less cumbersome and less error-prone.
 \end{abstract}
 
 \tableofcontents
 \clearpage
 
 \section{Introduction}
+\subsection{For the impatient}
+Writing good colorblind-safe documents can be a tricky task.
+It is a good starting point to realize that the default \LaTeX\ colors like \hlc[red]{red} or \hlc[blue]{blue} should be avoided.
+This is why for the impatient, simply loading this package without specifying any options (i.e.\ \cs{usepackage\{colorblind\}}) redefines the default colors to more sensible alternatives.
+\footnote{Where no suitable redefinition was possible for a builtin named color, the definition is changed to black.}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\node[inner sep=1, fill=red] at (-1.2*0.7cm,2.3*0.7cm) {R};
+		\node[inner sep=1, fill=green] at (-1.2*0.7cm, 1.8*0.7cm) {G};
+		\node[inner sep=1, fill=blue] at (-1.2*0.7cm,1.3*0.7cm) {B};
+
+		\node at (1*1cm-1cm,2.3*0.7cm) {0};
+		\node at (1*1cm-1cm,1.8*0.7cm) {119};
+		\node at (1*1cm-1cm,1.3*0.7cm) {187};
+		\draw[fill=T-Q-V1] (1*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (1*1cm-1cm,-1*0.7cm) {\vphantom{bp}blue};
+
+		\node at (2*1cm-1cm,2.3*0.7cm) {51};
+		\node at (2*1cm-1cm,1.8*0.7cm) {187};
+		\node at (2*1cm-1cm,1.3*0.7cm) {238};
+		\draw[fill=T-Q-V2] (2*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (2*1cm-1cm,-1*0.7cm) {\vphantom{bp}cyan};
+
+		\node at (3*1cm-1cm,2.3*0.7cm) {0};
+		\node at (3*1cm-1cm,1.8*0.7cm) {153};
+		\node at (3*1cm-1cm,1.3*0.7cm) {136};
+		\draw[fill=T-Q-V3] (3*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (3*1cm-1cm,-1*0.7cm) {\vphantom{bp}green};
+
+		\node at (4*1cm-1cm,2.3*0.7cm) {238};
+		\node at (4*1cm-1cm,1.8*0.7cm) {119};
+		\node at (4*1cm-1cm,1.3*0.7cm) {51};
+		\draw[fill=T-Q-V4] (4*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (4*1cm-1cm,-1*0.7cm) {\vphantom{bp}orange};
+
+		\node at (5*1cm-1cm,2.3*0.7cm) {204};
+		\node at (5*1cm-1cm,1.8*0.7cm) {51};
+		\node at (5*1cm-1cm,1.3*0.7cm) {17};
+		\draw[fill=T-Q-V5] (5*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (5*1cm-1cm,-1*0.7cm) {\vphantom{bp}red};
+
+		\node at (6*1cm-1cm,2.3*0.7cm) {187};
+		\node at (6*1cm-1cm,1.8*0.7cm) {187};
+		\node at (6*1cm-1cm,1.3*0.7cm) {187};
+		\draw[fill=T-Q-V0] (6*1cm-1cm,0) circle (0.7cm);
+		\node[rotate=25, anchor=north east] at (6*1cm-1cm,-1*0.7cm) {\vphantom{bp}gray};
+
+	\end{tikzpicture}
+	\caption{Redefinitions of the default \LaTeX\ colors.}
+\end{figure}
+
+It should be noted that this is a very brute-force way of trying to achieve colorblind-safeness.
+If you care about this topic (which you should), the rest of this document provides details on how colorblind-safeness is best achieved in different scenarios.
+
 \subsection{Package options}
 \marg{\texttt{Tol}\\\texttt{OkabeIto}}%
 The \colorblind package provides the color schemes by Paul Tol~\cite{Tol} and the Okabe Ito color palette~\cite{Ichihara_2008}.
@@ -111,15 +164,18 @@ Continuous versions of color schemes are only available when the colors are allo
 The package uses \texttt{TikZ} to draw the discrete versions of color schemes.
 Providing the option \texttt{no-tikz} disables this, the command \cs{drawScheme} is not defined in this case.
 
+\marg{\texttt{keep-defaults}}%
+The package redefines the default colors like \hlc[T-Q-PH5]{red} or \hlc[T-Q-PH1]{blue} to be colorblind-safe. By specifying this option, the defaults are not changed.
+
 \subsection{Overview}
 As an example for how to use the colors, we look at the \emph{bright qualitative} color scheme by Tol.
 \cref{fig:T-Q-Bexample} shows the colors in the scheme.
 
 \begin{figure}[ht]
-    \centering
-    \drawScheme{T-Q-B}
-    \caption{Bright qualitative color scheme by Tol.}
-    \label{fig:T-Q-Bexample}
+	\centering
+	\drawScheme{T-Q-B}
+	\caption{Bright qualitative color scheme by Tol.}
+	\label{fig:T-Q-Bexample}
 \end{figure}
 
 All colors in this model start with \texttt{T-Q-B}, indicating that it is a scheme by \textbf{T}ol, that it is a \textbf{q}ualitative scheme, and that it is the \textbf{b}right scheme.
@@ -128,10 +184,10 @@ The additional color \texttt{T-Q-B0} provides a color that can be used, e.g., to
 
 There are two reasons why color names are not based on natural color names (e.g., ``\hlc[T-Q-PH1]{blue}''):
 \begin{enumerate}
-    \item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
-        This meaning is difficult for people with color vision deficiencies to pick up.
-        By not using natural color names, it is easier to write colorblind-safe documents that do not make use of said connotations.
-    \item Natural color names can be cumbersome, e.g., when slight variations of a color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
+	\item Certain colors (\hlc[T-Q-PH3]{green}, \hlc[T-Q-PH5]{red}) are often used by people with full color vision to convey certain meanings (\hlc[T-Q-PH3]{good}, \hlc[T-Q-PH5]{bad}).
+	      This meaning is difficult for people with color vision deficiencies to pick up.
+	      By not using natural color names, it is easier to write colorblind-safe documents that do not make use of said connotations.
+	\item Natural color names can be cumbersome, e.g., when slight variations of a color are used. It is annoying having to look up if a color is called, e.g., \hlc[T-Q-PH1]{blue} or \hlc[T-Q-PH2]{cyan}.
 \end{enumerate}
 
 These colors are used the same way as any other colors. To change the text color to \texttt{T-Q-B1} for example, use \cs{color\{T-Q-B1\}}.
@@ -143,26 +199,26 @@ Color vision deficiencies apper in many different variations and grades of sever
 This means that while the color schemes provided by this package are easier to distinguish for the most common color vision deficiencies, information encoded only in color can never be truely colorblind safe.
 This leads us to the most important rule in colorblind-safe design:
 \begin{center}
-    \setlength{\fboxrule}{1pt}
-    \textbf{Rule 1}:
-    \fbox{\parbox{0.65\columnwidth}{
-        Always provide information in more ways than just color.
-    }}
+	\setlength{\fboxrule}{1pt}
+	\textbf{Rule 1}:
+	\fbox{\parbox{0.65\columnwidth}{
+			Always provide information in more ways than just color.
+		}}
 \end{center}
 
 If this rule is satisfied in a document, it is by construction guaranteed to be colorblind-safe.
 However, this does not mean that it is \emph{convenient} for people with color vision deficiencies to extract the information.
 In order to achieve the best possible result, a few more rules should be considered when using color.
 \begin{center}
-    \setlength{\fboxrule}{1pt}
-    \textbf{Rule 2}:
-    \fbox{\parbox{0.65\columnwidth}{
-        Stick to a color scheme.
-        \begin{itemize}
-            \item[(\textbf{a})] Do not mix colors within a scheme.
-            \item[(\textbf{b})] Do not use shades of colors.
-        \end{itemize}
-    }}
+	\setlength{\fboxrule}{1pt}
+	\textbf{Rule 2}:
+	\fbox{\parbox{0.65\columnwidth}{
+			Stick to a color scheme.
+			\begin{itemize}
+				\item[(\textbf{a})] Do not mix colors within a scheme.
+				\item[(\textbf{b})] Do not use shades of colors.
+			\end{itemize}
+		}}
 \end{center}
 
 Colors within colorblind-safe color schemes are designed to be eaily distinguishable for people with the most common color vision deficiencies, so we should only use colors from one color scheme in any given visual unit.
@@ -171,11 +227,11 @@ Even if the result of the mixing is easily distinguishable for people with norma
 For the same reaseon, shades of colors (i.e.\ mixings with black or white) should be avoided, because the brightness of colors is also used to make sure the colors are distinguishable.
 
 \begin{center}
-    \setlength{\fboxrule}{1pt}
-    \textbf{Rule 3}:
-    \fbox{\parbox{0.65\columnwidth}{
-        Do not use color for information and aesthetics simultaneously.
-    }}
+	\setlength{\fboxrule}{1pt}
+	\textbf{Rule 3}:
+	\fbox{\parbox{0.65\columnwidth}{
+			Do not use color for information and aesthetics simultaneously.
+		}}
 \end{center}
 
 Color is often also used for aesthetic reasons, e.g., on a scientific poster.
@@ -183,11 +239,11 @@ This is usually unproblematic, as the color does not convey information in this 
 However, if color is used to convey information in a visual unit, avoid using additional color for aesthetic purposes, as this makes it more difficult to extract the information encoded in the color.
 
 \begin{center}
-    \setlength{\fboxrule}{1pt}
-    \textbf{Rule 4}:
-    \fbox{\parbox{0.65\columnwidth}{
-        Do not use rainbow color schemes.
-    }}
+	\setlength{\fboxrule}{1pt}
+	\textbf{Rule 4}:
+	\fbox{\parbox{0.65\columnwidth}{
+			Do not use rainbow color schemes.
+		}}
 \end{center}
 
 Due to the many different colors in a rainbow color scheme, they are inevitably difficult to distinguish for people with color vision deficiencies.
@@ -200,16 +256,16 @@ As a side node, following these rules leads to documents that do not suffer from
 \section{Provided color schemes}\label{sec:colors}
 The color schemes provided are split into three groups:
 \begin{itemize}
-    \item Qualitative schemes:\newline
-        These schemes are used to convey qualitative information, such as different data sources, countries or manufacturers.
-        They should usually be used for coloring text or distinguishing different lines/bars in a plot.
-    \item Diverging color schemes:\newline
-        When quantitative data ranges between two extremes, and the middle is being considered ``neutral'', a diverging color scheme should be used.
-        Examples for this kind of data might be test grades, temperatures or pH values.
-    \item Sequential color schemes:\newline
-        For quantitative data without an important midpoint, sequential color schemes should be preferred over diverging ones.
-        This is especially true for quantites that start from $0$.
-        They can be used to denote for example velocities, concentrations or pressures.
+	\item Qualitative schemes:\newline
+	      These schemes are used to convey qualitative information, such as different data sources, countries or manufacturers.
+	      They should usually be used for coloring text or distinguishing different lines/bars in a plot.
+	\item Diverging color schemes:\newline
+	      When quantitative data ranges between two extremes, and the middle is being considered ``neutral'', a diverging color scheme should be used.
+	      Examples for this kind of data might be test grades, temperatures or pH values.
+	\item Sequential color schemes:\newline
+	      For quantitative data without an important midpoint, sequential color schemes should be preferred over diverging ones.
+	      This is especially true for quantites that start from $0$.
+	      They can be used to denote for example velocities, concentrations or pressures.
 \end{itemize}
 
 For each type of schemes, this package provides a range of options.
@@ -223,52 +279,52 @@ This is denoted under the scheme name.\clearpage
 
 \subsubsection{Qualitative color schemes}\label{sec:T-Q}
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-B}}\\
-    \textbf{B}right\\
-    \phantom{pb}
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-B}}\\
+	\textbf{B}right\\
+	\phantom{pb}
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-V}}\\
-    \textbf{V}ibrant
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-V}}\\
+	\textbf{V}ibrant
 \end{minipage}
 
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-HC}}\\
-    \textbf{H}igh-\textbf{C}ontrast\\
-    works for black and white printout
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-HC}}\\
+	\textbf{H}igh-\textbf{C}ontrast\\
+	works for black and white printout
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-MC}}\\
-    \textbf{M}edium-\textbf{C}ontrast\\
-    works for black and white printout
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-MC}}\\
+	\textbf{M}edium-\textbf{C}ontrast\\
+	works for black and white printout
 \end{minipage}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-Q-M}}\\
-    \textbf{M}uted
+	\scalebox{0.7}{\drawScheme{T-Q-M}}\\
+	\textbf{M}uted
 \end{center}
 
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-PH}}\\
-    \textbf{P}ale \textbf{H}ighlight\\
-    specifically for text background
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-PH}}\\
+	\textbf{P}ale \textbf{H}ighlight\\
+	specifically for text background
 \end{minipage}\hfill%
 \begin{minipage}{0.5\textwidth}
-    \centering
-    \scalebox{0.7}{\drawScheme{T-Q-DT}}\\
-    \textbf{D}ark \textbf{T}ext\\
-    specifically for text color
+	\centering
+	\scalebox{0.7}{\drawScheme{T-Q-DT}}\\
+	\textbf{D}ark \textbf{T}ext\\
+	specifically for text color
 \end{minipage}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-Q-L}}\\
-    \textbf{L}ight\\
-    less distinguishable than other schemes,\\ mostly meant for filling in labelled cells
+	\scalebox{0.7}{\drawScheme{T-Q-L}}\\
+	\textbf{L}ight\\
+	less distinguishable than other schemes,\\ mostly meant for filling in labelled cells
 \end{center}\clearpage
 
 \subsubsection{Diverging color schemes}\label{sec:T-D}
@@ -276,27 +332,27 @@ For diverging schemes, when a continuous scheme is needed, the colors are allowe
 When using the option \texttt{pgf}, the interpolations are available as colormaps with the names of their color scheme.
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-D-S}}\\
-    \drawSchemeC[0.6\textwidth]{T-D-S}\\
-    \textbf{S}unset
+	\scalebox{0.7}{\drawScheme{T-D-S}}\\
+	\drawSchemeC[0.6\textwidth]{T-D-S}\\
+	\textbf{S}unset
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-D-N}}\\
-    \drawSchemeC[0.9\textwidth]{T-D-N}\\
-    \textbf{N}ightfall
+	\scalebox{0.7}{\drawScheme{T-D-N}}\\
+	\drawSchemeC[0.9\textwidth]{T-D-N}\\
+	\textbf{N}ightfall
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-D-BR}}\\
-    \drawSchemeC[0.5\textwidth]{T-D-BR}\\
-    \textbf{B}u\textbf{R}d
+	\scalebox{0.7}{\drawScheme{T-D-BR}}\\
+	\drawSchemeC[0.5\textwidth]{T-D-BR}\\
+	\textbf{B}u\textbf{R}d
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-D-PG}}\\
-    \drawSchemeC[0.5\textwidth]{T-D-PG}\\
-    \textbf{P}R\textbf{G}n
+	\scalebox{0.7}{\drawScheme{T-D-PG}}\\
+	\drawSchemeC[0.5\textwidth]{T-D-PG}\\
+	\textbf{P}R\textbf{G}n
 \end{center}\clearpage
 
 \subsubsection{Sequential color schemes}\label{sec:T-S}
@@ -307,40 +363,40 @@ When using the option \texttt{pgf}, the interpolations are available as colormap
 When the discrete scheme is not shown, this is because there are too many colors in it.
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-S-YOB}}\\
-    \drawSchemeC[0.5\textwidth]{T-S-YOB}\\
-    \textbf{Y}l\textbf{O}r\textbf{B}r
+	\scalebox{0.7}{\drawScheme{T-S-YOB}}\\
+	\drawSchemeC[0.5\textwidth]{T-S-YOB}\\
+	\textbf{Y}l\textbf{O}r\textbf{B}r
 \end{center}
 
 \begin{center}
-    \drawSchemeC[0.9\textwidth]{T-S-IR}\\
-    \textbf{Ir}idescent
+	\drawSchemeC[0.9\textwidth]{T-S-IR}\\
+	\textbf{Ir}idescent
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-S-IN}}\\
-    \drawSchemeC[0.6\textwidth]{T-S-IN}\\
-    \textbf{In}candescent\\
-    not print-friendly
+	\scalebox{0.7}{\drawScheme{T-S-IN}}\\
+	\drawSchemeC[0.6\textwidth]{T-S-IN}\\
+	\textbf{In}candescent\\
+	not print-friendly
 \end{center}
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{T-S-DR}}\\
-    \textbf{D}iscrete \textbf{R}ainbow\\
-    Do not interpolate!
+	\scalebox{0.7}{\drawScheme{T-S-DR}}\\
+	\textbf{D}iscrete \textbf{R}ainbow\\
+	Do not interpolate!
 \end{center}
 
 \begin{center}
-    \drawSchemeC[\textwidth]{T-S-SR}\\
-    \textbf{S}mooth \textbf{R}ainbow\\
+	\drawSchemeC[\textwidth]{T-S-SR}\\
+	\textbf{S}mooth \textbf{R}ainbow\\
 \end{center}\clearpage
 
 \subsection{Okabe Ito qualitative color scheme}\label{sec:OkabeIto}
 This is the qualitative color scheme commonly known as the \emph{Okabe Ito} color palette~\cite{Ichihara_2008}.
 
 \begin{center}
-    \scalebox{0.7}{\drawScheme{OI}}\\
-    \textbf{O}kabe \textbf{I}to
+	\scalebox{0.7}{\drawScheme{OI}}\\
+	\textbf{O}kabe \textbf{I}to
 \end{center}
 
 \section{Provided commands}
