@@ -24,7 +24,7 @@
 \newif\ifredefinedefaults
 \redefinedefaultstrue
 \DeclareOption{keep-defaults}{
-    \redefinedefaultsfalse
+	\redefinedefaultsfalse
 }
 
 \newif\ifTolColors
@@ -339,25 +339,25 @@
 \ProcessOptions\relax
 
 \ifredefinedefaults
-    % This redefines the default colors by removing most of them and setting
-    % the remaining to colors from the qualitative Vibrant color scheme by Tol.
-    \xdefinecolor{blue}{RGB}{0,119,187}
-    \xdefinecolor{cyan}{RGB}{51,187,238}
-    \xdefinecolor{gray}{RGB}{187,187,187}
-    \xdefinecolor{green}{RGB}{0,153,136}
-    \xdefinecolor{orange}{RGB}{238,119,51}
-    \xdefinecolor{red}{RGB}{204,51,17}
-    \xdefinecolor{brown}{RGB}{0,0,0}
-    \xdefinecolor{darkgray}{RGB}{0,0,0}
-    \xdefinecolor{lightgray}{RGB}{0,0,0}
-    \xdefinecolor{lime}{RGB}{0,0,0}
-    \xdefinecolor{magenta}{RGB}{0,0,0}
-    \xdefinecolor{olive}{RGB}{0,0,0}
-    \xdefinecolor{pink}{RGB}{0,0,0}
-    \xdefinecolor{purple}{RGB}{0,0,0}
-    \xdefinecolor{teal}{RGB}{0,0,0}
-    \xdefinecolor{yellow}{RGB}{0,0,0}
-    \xdefinecolor{violet}{RGB}{0,0,0}
+	% This redefines the default colors by removing most of them and setting
+	% the remaining to colors from the qualitative Vibrant color scheme by Tol.
+	\xdefinecolor{blue}{RGB}{68,119,170}
+	\xdefinecolor{cyan}{RGB}{102,204,238}
+	\xdefinecolor{green}{RGB}{34,136,51}
+	\xdefinecolor{yellow}{RGB}{204,187,68}
+	\xdefinecolor{red}{RGB}{238,102,119}
+	\xdefinecolor{violet}{RGB}{170,51,119}
+	\xdefinecolor{gray}{RGB}{187,187,187}
+	\xdefinecolor{orange}{RGB}{0,0,0}
+	\xdefinecolor{brown}{RGB}{0,0,0}
+	\xdefinecolor{darkgray}{RGB}{0,0,0}
+	\xdefinecolor{lightgray}{RGB}{0,0,0}
+	\xdefinecolor{lime}{RGB}{0,0,0}
+	\xdefinecolor{magenta}{RGB}{0,0,0}
+	\xdefinecolor{olive}{RGB}{0,0,0}
+	\xdefinecolor{pink}{RGB}{0,0,0}
+	\xdefinecolor{purple}{RGB}{0,0,0}
+	\xdefinecolor{teal}{RGB}{0,0,0}
 \fi
 
 % define continuous colormaps and command to plot them if `pgf` option is given
