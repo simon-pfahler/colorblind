@@ -1,6 +1,6 @@
 ## Package `colorblind` by Simon Pfahler
 
-Version 2024-12-24 v1.1
+Version 2024-12-23 v1.1
 
 In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
 This package provides the tools necessary for colorblind-safe typesetting in LaTeX.
