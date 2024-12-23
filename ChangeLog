@@ -3,6 +3,11 @@ https://github.com/simon-pfahler/colorblind/issues
 
 History
 =======
+2024/12/23 v1.1
+* Redefine default colors unless the option `keep-defaults` is specified
+* Refactor documentation
+* Minor bug fixes
+
 2024/05/16 v1.0.1
 * Add package options `pgf` and `no-tikz` to give more control over which
 packages are loaded
