@@ -1,6 +1,6 @@
 %%
 %% ----------------------------------------------------------------
-%% Copyright (C) 2023-2024 by Simon Pfahler <simon.pfahler at ur dot de>
+%% Copyright (C) 2023-2026 by Simon Pfahler <simon.pfahler at ur dot de>
 %% ----------------------------------------------------------------
 %%
 %! TeX program = lualatex
@@ -73,7 +73,7 @@
 
 \title{Easy colorblind-safe typesetting:\\ the \colorblind package}
 \author{Simon Pfahler}
-\date{\today\\Version 1.1}
+\date{\today\\Version 1.2}
 
 
 \begin{document}
@@ -404,6 +404,21 @@ This is the qualitative color scheme commonly known as the \emph{Okabe Ito} colo
 	\scalebox{0.7}{\drawScheme{OI}}\\
 	\textbf{O}kabe \textbf{I}to
 \end{center}
+
+\section{Notes on color models}
+To digitally represent a color, we need to choose a color model, e.g.\ \texttt{rgb} or \texttt{cmyk}.
+The colors provided by this package were originally defined in RGB-based color models like \texttt{rgb} or \texttt{html}.
+Therefore, \texttt{RGB} definitions are used when no color model is specified explicitly.
+In the vast majority of use cases, no such color model should be specified.
+The reason for this is that modern devices like printers and screens have their own built-in conversion tables between color models, which provide better conversion than some generic formula can.
+For example when sending a document to a printer, all colors (even colors already specified in \texttt{cymk}) are converted to this device's specific \texttt{cmyk} color model and ink is put on the paper according to these device-specific numbers.
+Manually converting \texttt{rgb} to \texttt{cmyk} beforehand is therefore not beneficial, as a conversion always has to be performed anyways.
+
+Due to technical reasons in very rare use-cases, definitions in \texttt{cmyk} are necessary and are also provided.
+It is strongly discouraged that you use the \texttt{cmyk} color model, unless you have a very good reason why you need it.
+The only good reason I came across so far is that you send your document to someone else for printing and that person refuses to print your document unless you specify your colors in the \texttt{cmyk} color model\footnote{This may sound unreasonable, but precisely this happened with the printing house of a very well-known \LaTeX\ book.}.
+In particular and as mentioned above, \texttt{cmyk} should not be used just because you want to print a document.
+Let the printer handle conversion in that case.
 
 \section{Provided commands}
 \marg{\cs{drawScheme\{...\}}}%
