@@ -362,13 +362,17 @@
 	% Wrap the color command to check if any of the colors are used that are
 	% redefined to black. If that is the case, issue a warning
 	\let\origcolor\color
-	\renewcommand{\color}[1]{%
+	\renewcommand{\color}[2][]{%
 	\@for\c:={orange,brown,darkgray,lightgray,lime,magenta,olive,pink,purple,teal}\do{%
-		\ifthenelse{\equal{#1}{\c}}%
-		{\PackageWarning{colorblind}{#1 is redefined to black and should not be used!}}
+		\ifthenelse{\equal{#2}{\c}}%
+		{\PackageWarning{colorblind}{#2 is redefined to black and should not be used!}}
 		{}%
 	}%
-\origcolor{#1}%
+	\if\relax\detokenize{#1}\relax
+	\origcolor{#2}%
+	\else
+	\origcolor[#1]{#2}%
+	\fi
 	}
 \fi
 
