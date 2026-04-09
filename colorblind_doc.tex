@@ -201,8 +201,8 @@ These colors are used the same way as any other colors. To change the text color
 \section{Guidelines}\label{sec:guidelines}
 In this section, we provide some general guidelines for colorblind-safe design.
 
-Color vision deficiencies apper in many different variations and grades of severity, up to monochromacy, where different colors can only be distinguished via their perceived brightness.
-This means that while the color schemes provided by this package are easier to distinguish for the most common color vision deficiencies, information encoded only in color can never be truely colorblind safe.
+Color vision deficiencies appear in many different variations and grades of severity, up to monochromacy, where different colors can only be distinguished via their perceived brightness.
+This means that while the color schemes provided by this package are easier to distinguish for the most common color vision deficiencies, information encoded only in color can never be truly colorblind safe.
 This leads us to the most important rule in colorblind-safe design:
 \begin{center}
 	\setlength{\fboxrule}{1pt}
@@ -227,10 +227,10 @@ In order to achieve the best possible result, a few more rules should be conside
 		}}
 \end{center}
 
-Colors within colorblind-safe color schemes are designed to be eaily distinguishable for people with the most common color vision deficiencies, so we should only use colors from one color scheme in any given visual unit.
+Colors within colorblind-safe color schemes are designed to be easily distinguishable for people with the most common color vision deficiencies, so we should only use colors from one color scheme in any given visual unit.
 In extension, even colors from the same scheme should not be mixed, since this makes it harder to distinguish them.
 Even if the result of the mixing is easily distinguishable for people with normal color vision, the same might not be true under certain color vision deficiencies.
-For the same reaseon, shades of colors (i.e.\ mixings with black or white) should be avoided, because the brightness of colors is also used to make sure the colors are distinguishable.
+For the same reason, shades of colors (i.e.\ mixings with black or white) should be avoided, because the brightness of colors is also used to make sure the colors are distinguishable.
 
 \begin{center}
 	\setlength{\fboxrule}{1pt}
@@ -270,7 +270,7 @@ The color schemes provided are split into three groups:
 	      Examples for this kind of data might be test grades, temperatures or pH values.
 	\item Sequential color schemes:\newline
 	      For quantitative data without an important midpoint, sequential color schemes should be preferred over diverging ones.
-	      This is especially true for quantites that start from $0$.
+	      This is especially true for quantities that start from $0$.
 	      They can be used to denote for example velocities, concentrations or pressures.
 \end{itemize}
 
@@ -364,7 +364,7 @@ When using the option \texttt{pgf}, the interpolations are available as colormap
 
 \subsubsection{Sequential color schemes}\label{sec:T-S}
 For most sequential schemes, a continuous scheme can be obtained again by linearly interpolating the colors.
-The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuos variation, the \emph{smooth rainbow} scheme.
+The only exception to this is the \emph{discrete rainbow} scheme, which has an explicitly continuous variation, the \emph{smooth rainbow} scheme.
 When using the option \texttt{pgf}, the interpolations are available as colormaps with the names of their color scheme.
 
 When the discrete scheme is not shown, this is because there are too many colors in it.
