@@ -27,6 +27,12 @@
 	\redefinedefaultsfalse
 }
 
+\newif\ifmaptoblack
+\maptoblacktrue
+\DeclareOption{keep-additional}{
+	\maptoblackfalse
+}
+
 \newif\ifTolColors
 \TolColorsfalse
 \DeclareOption{Tol}{
@@ -340,7 +346,7 @@
 
 \ifredefinedefaults
 	% This redefines the default colors by removing most of them and setting
-	% the remaining to colors from the qualitative Vibrant color scheme by Tol.
+	% the remaining to colors from the qualitative Bright color scheme by Tol.
 	\definecolor{blue}{RGB/cmyk}{68,119,170/0.60000,0.30000,0.00000,0.33333}
 	\definecolor{cyan}{RGB/cmyk}{102,204,238/0.57143,0.14286,0.00000,0.06667}
 	\definecolor{green}{RGB/cmyk}{34,136,51/0.75000,0.00000,0.62500,0.46667}
@@ -348,24 +354,26 @@
 	\definecolor{red}{RGB/cmyk}{238,102,119/0.00000,0.57143,0.50000,0.06667}
 	\definecolor{violet}{RGB/cmyk}{170,51,119/0.00000,0.70000,0.30000,0.33333}
 	\definecolor{gray}{RGB/cmyk}{187,187,187/0.00000,0.00000,0.00000,0.26667}
-	\definecolor{orange}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{brown}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{darkgray}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{lightgray}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{lime}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{magenta}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{olive}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{pink}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{purple}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
-	\definecolor{teal}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+	\ifmaptoblack
+		\definecolor{orange}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{brown}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{darkgray}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{lightgray}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{lime}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{magenta}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{olive}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{pink}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{purple}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+		\definecolor{teal}{RGB/cmyk}{0,0,0/0.00000,0.00000,0.00000,1.00000}
+	\fi
 
 	% Wrap the color command to check if any of the colors are used that are
-	% redefined to black. If that is the case, issue a warning
+	% not redefined to colorblind-safe colors
 	\let\origcolor\color
 	\renewcommand{\color}[2][]{%
 	\@for\c:={orange,brown,darkgray,lightgray,lime,magenta,olive,pink,purple,teal}\do{%
 		\ifthenelse{\equal{#2}{\c}}%
-		{\PackageWarning{colorblind}{#2 is redefined to black and should not be used!}}
+		{\PackageWarning{colorblind}{#2 is not colorblind-safe and should not be used!}}
 		{}%
 	}%
 	\if\relax\detokenize{#1}\relax
