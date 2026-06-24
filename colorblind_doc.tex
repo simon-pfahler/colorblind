@@ -97,7 +97,7 @@
 Writing good colorblind-safe documents can be a tricky task.
 It is a good starting point to realize that the default \LaTeX\ colors like \hlc[red]{red} or \hlc[blue]{blue} should be avoided.
 This is why for the impatient, simply loading this package without specifying any options (i.e.\ \cs{usepackage\{colorblind\}}) redefines the default colors to more sensible alternatives.
-\footnote{Where no suitable redefinition was possible for a builtin named color, the definition is changed to black.}
+\footnote{Where no suitable redefinition was possible for a built-in named color, the definition is changed to black, see package option \texttt{keep-additional}.}
 
 \begin{figure}[ht]
 	\centering
@@ -150,6 +150,7 @@ This is why for the impatient, simply loading this package without specifying an
 
 	\end{tikzpicture}
 	\caption{Redefinitions of the default \LaTeX\ colors.}
+	\label{fig:default-redefinition}
 \end{figure}
 
 It should be noted that this is a very brute-force way of trying to achieve colorblind-safeness.
@@ -171,7 +172,10 @@ The package uses \texttt{TikZ} to draw the discrete versions of color schemes.
 Providing the option \texttt{no-tikz} disables this, the command \cs{drawScheme} is not defined in this case.
 
 \marg{\texttt{keep-defaults}}%
-The package redefines the default colors like \hlc[T-Q-PH5]{red} or \hlc[T-Q-PH1]{blue} to be colorblind-safe. By specifying this option, the defaults are not changed.
+The package redefines the built-in colors like \hlc[T-Q-PH5]{red} or \hlc[T-Q-PH1]{blue} to be colorblind-safe. By specifying this option, the built-in colors are not changed.
+
+\marg{\texttt{keep-additional}}%
+If \texttt{keep-defaults} is not specified, the built-in colors not in \cref{fig:default-redefinition} (like \texttt{orange} or \texttt{magenta}) are redefined to black so one does not use them by accident. By specifying this option, these additional built-in colors are instead left as they were. Beware that these are not colorblind-safe, so only use this option if you know what you are doing!
 
 \subsection{Overview}
 As an example for how to use the colors, we look at the \emph{bright qualitative} color scheme by Tol.
