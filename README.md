@@ -1,6 +1,7 @@
 ## Package `colorblind` by Simon Pfahler
 
 Latest version: **Version 2026-01-19 v1.2.1**
+
 Next planned release to CTAN: **End of 2026/Beginning of 2027**
 
 In colorblind-safe documents, the contents are presented in a way that the same information is conveyed to readers regardless of a potential color vision deficiency.
